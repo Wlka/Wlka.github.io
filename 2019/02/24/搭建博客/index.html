@@ -57,7 +57,7 @@
 <h4 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h4><ul>
 <li>首先，我们要注册一个<a href="https://github.com" target="_blank" rel="noopener">github</a>账号，然后创建一个仓库<br><img src="/2019/02/24/搭建博客/创建仓库.png" alt><br>创建后新建一个index.html文件，作为博客的根目录<br><br></li>
 <li>然后，下载安装<a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">node.js</a>，下载安装<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">git</a>，安装完成后还需要做一些git的配置，网上有不少教程，这里就不再赘述了</li>
-<li>以上步骤就绪后,打开命令行，cd到你要放置博客文件的目录，输入以下命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g     #等待下载安装完毕</span><br><span class="line">hexo init yourBlogName      #你的路径下会自动生成一个你指定名称的文件夹</span><br><span class="line">cd yourBlogName</span><br><span class="line">npm install                 #继续完成安装</span><br><span class="line">hexo s -p 端口号            #启动hexo服务</span><br></pre></td></tr></table></figure>
+<li>以上步骤就绪后,打开命令行，cd到你要放置博客文件的目录，输入以下命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g     #等待下载安装完毕</span><br><span class="line">hexo init yourBlogName      #你的路径下会自动生成一个你指定名称的文件夹</span><br><span class="line">cd yourBlogName</span><br><span class="line">npm install                 #继续完成安装</span><br><span class="line">hexo s                      #启动hexo服务</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <blockquote>
@@ -69,14 +69,14 @@
 </li>
 </ul>
 <h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>我们要部署到github上，需要用到deploy命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g      #生成</span><br><span class="line">hexo d      #部署</span><br></pre></td></tr></table></figure></p>
-<p>在部署前我们可以先在本地预览<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s -p 端口号</span><br></pre></td></tr></table></figure></p>
+<p>在部署前我们可以先在本地预览<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s -p 端口号    #这里可指定启动服务的端口</span><br></pre></td></tr></table></figure></p>
 <hr>
 <h4 id="到这里为止，基本就完成了"><a href="#到这里为止，基本就完成了" class="headerlink" title="到这里为止，基本就完成了"></a>到这里为止，基本就完成了</h4><p>如果你觉得默认的主题太丑，<a href="https://hexo.io/themes" target="_blank" rel="noopener">这里</a>是你一个很好的选择，看到喜欢的主题，去github上下载源码，放到博客的themes文件夹下，修改_config.yml文件的<font color="red">theme</font>选项，重新构建，你就会发现博客的主题变成你想要的那个啦！</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/02/24/搭建博客/" data-id="cjsit09gi0000lcuyk2moiwxk" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/02/24/搭建博客/" data-id="cjsiyklat00026kuybp76eojn" class="article-share-link">Share</a>
       
     </footer>
 

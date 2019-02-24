@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[用github+Hexo搭建个人博客]]></title>
     <url>%2F2019%2F02%2F24%2F%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%2F</url>
-    <content type="text"><![CDATA[前言github是一个面向开源及私有软件项目的托管平台，hexo是一个”快速、简洁且高效的博客框架”，这里我们利用github+hexo来搭建一个自己的博客 开始 首先，我们要注册一个github账号，然后创建一个仓库创建后新建一个index.html文件，作为博客的根目录 然后，下载安装node.js，下载安装git，安装完成后还需要做一些git的配置，网上有不少教程，这里就不再赘述了 以上步骤就绪后,打开命令行，cd到你要放置博客文件的目录，输入以下命令12345npm install hexo-cli -g #等待下载安装完毕hexo init yourBlogName #你的路径下会自动生成一个你指定名称的文件夹cd yourBlogNamenpm install #继续完成安装hexo s -p 端口号 #启动hexo服务 这时候打开你的浏览器，输入localhost:端口号你就会发现搭建的博客出来啦！ 别高兴的这么快现在我们只是在本地把博客构建出来而已，还需要进一步配置才能把博客部署到你的github仓库中，下面继续来看一下 使用vscode把整个博客文件夹打开(这里随便大家用哪个编辑器都可以)，打开_confid.yml文件这里的url按这个格式填这里把type改为git，同时加入repo和branch，分别填刚创建的仓库的地址和分支1npm install hexo-deployer-git --save #这里是为了发布到git 最后我们要部署到github上，需要用到deploy命令12hexo g #生成hexo d #部署 在部署前我们可以先在本地预览1hexo s -p 端口号 到这里为止，基本就完成了如果你觉得默认的主题太丑，这里是你一个很好的选择，看到喜欢的主题，去github上下载源码，放到博客的themes文件夹下，修改_config.yml文件的theme选项，重新构建，你就会发现博客的主题变成你想要的那个啦！]]></content>
+    <content type="text"><![CDATA[前言github是一个面向开源及私有软件项目的托管平台，hexo是一个”快速、简洁且高效的博客框架”，这里我们利用github+hexo来搭建一个自己的博客 开始 首先，我们要注册一个github账号，然后创建一个仓库创建后新建一个index.html文件，作为博客的根目录 然后，下载安装node.js，下载安装git，安装完成后还需要做一些git的配置，网上有不少教程，这里就不再赘述了 以上步骤就绪后,打开命令行，cd到你要放置博客文件的目录，输入以下命令12345npm install hexo-cli -g #等待下载安装完毕hexo init yourBlogName #你的路径下会自动生成一个你指定名称的文件夹cd yourBlogNamenpm install #继续完成安装hexo s #启动hexo服务 这时候打开你的浏览器，输入localhost:端口号你就会发现搭建的博客出来啦！ 别高兴的这么快现在我们只是在本地把博客构建出来而已，还需要进一步配置才能把博客部署到你的github仓库中，下面继续来看一下 使用vscode把整个博客文件夹打开(这里随便大家用哪个编辑器都可以)，打开_confid.yml文件这里的url按这个格式填这里把type改为git，同时加入repo和branch，分别填刚创建的仓库的地址和分支1npm install hexo-deployer-git --save #这里是为了发布到git 最后我们要部署到github上，需要用到deploy命令12hexo g #生成hexo d #部署 在部署前我们可以先在本地预览1hexo s -p 端口号 #这里可指定启动服务的端口 到这里为止，基本就完成了如果你觉得默认的主题太丑，这里是你一个很好的选择，看到喜欢的主题，去github上下载源码，放到博客的themes文件夹下，修改_config.yml文件的theme选项，重新构建，你就会发现博客的主题变成你想要的那个啦！]]></content>
   </entry>
   <entry>
     <title><![CDATA[iData常用基本数据类型]]></title>
@@ -14,5 +14,10 @@
     <title><![CDATA[Hello World]]></title>
     <url>%2F2019%2F02%2F24%2Fhello-world%2F</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[关于const]]></title>
+    <url>%2F2019%2F02%2F23%2F%E5%85%B3%E4%BA%8Econst%2F</url>
+    <content type="text"><![CDATA[const在星号左边，例如const int p，不可以通过p来修改指向位置的数据,但是可以修改p指向的地址 1234int a=5,b=0;const int *p=&amp;a;*p=10; //not allowed*p=&amp;b; //allowed const在星号右边，例如int const q,可以通过修改q来修改指向位置的数据，但是不可以修改q指向的地址 1234int a=5,b=0;int * const q=&amp;a;*q=10; //allowed*q=&amp;b; //not allowed const在函数后，该函数为const成员函数，函数不能修改数据成员，也不能调用非const函数 const在函数前，修改该函数的返回值，函数返回值(指针)的内容不能被修改，只能被赋给同类型的const指针]]></content>
   </entry>
 </search>
