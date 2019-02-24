@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  
+    <meta name="description" content="Welcome to my blog">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    用github+Hexo搭建个人博客 |
+    
+    Wlka</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-搭建博客" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      用github+Hexo搭建个人博客
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/02/24/搭建博客/" class="article-date">
+  <time datetime="2019-02-24T10:01:10.634Z" itemprop="datePublished">2019-02-24</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p><a href="https://github.com" target="_blank" rel="noopener">github</a>是一个面向开源及私有软件项目的托管平台，<a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">hexo</a>是一个”快速、简洁且高效的博客框架”，这里我们利用github+hexo来搭建一个自己的博客</p>
+<h4 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h4><ul>
+<li>首先，我们要注册一个<a href="https://github.com" target="_blank" rel="noopener">github</a>账号，然后创建一个仓库<br><img src="/2019/02/24/搭建博客/创建仓库.png" alt><br>创建后新建一个index.html文件，作为博客的根目录<br><br></li>
+<li>然后，下载安装<a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">node.js</a>，下载安装<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">git</a>，安装完成后还需要做一些git的配置，网上有不少教程，这里就不再赘述了</li>
+<li>以上步骤就绪后,打开命令行，cd到你要放置博客文件的目录，输入以下命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g     #等待下载安装完毕</span><br><span class="line">hexo init yourBlogName      #你的路径下会自动生成一个你指定名称的文件夹</span><br><span class="line">cd yourBlogName</span><br><span class="line">npm install                 #继续完成安装</span><br><span class="line">hexo s -p 端口号            #启动hexo服务</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>这时候打开你的浏览器，输入<font color="red">localhost:端口号</font>你就会发现搭建的博客出来啦！</p>
+</blockquote>
+<h4 id="别高兴的这么快"><a href="#别高兴的这么快" class="headerlink" title="别高兴的这么快"></a>别高兴的这么快</h4><p>现在我们只是在本地把博客构建出来而已，还需要进一步配置才能把博客部署到你的github仓库中，下面继续来看一下</p>
+<ul>
+<li>使用vscode把整个博客文件夹打开(这里随便大家用哪个编辑器都可以)，打开_confid.yml文件<br><img src="/2019/02/24/搭建博客/setUrl.png" alt><br><font size="2" color="rgb(255,255,255)"><center>这里的url按这个格式填</center></font><br><img src="/2019/02/24/搭建博客/repo.png" alt><br><font size="2" color="rgb(255,255,255)"><center>这里把type改为git，同时加入repo和branch，分别填刚创建的仓库的地址和分支</center></font><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save    #这里是为了发布到git</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>我们要部署到github上，需要用到deploy命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g      #生成</span><br><span class="line">hexo d      #部署</span><br></pre></td></tr></table></figure></p>
+<p>在部署前我们可以先在本地预览<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s -p 端口号</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h4 id="到这里为止，基本就完成了"><a href="#到这里为止，基本就完成了" class="headerlink" title="到这里为止，基本就完成了"></a>到这里为止，基本就完成了</h4><p>如果你觉得默认的主题太丑，<a href="https://hexo.io/themes" target="_blank" rel="noopener">这里</a>是你一个很好的选择，看到喜欢的主题，去github上下载源码，放到博客的themes文件夹下，修改_config.yml文件的<font color="red">theme</font>选项，重新构建，你就会发现博客的主题变成你想要的那个啦！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://Wlka.github.io/2019/02/24/搭建博客/" data-id="cjsit09gi0000lcuyk2moiwxk" class="article-share-link">Share</a>
+      
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2019/02/24/基本数据类型/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">iData常用基本数据类型</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  
+  <div class="outer">
+    <ul class="list-inline">
+      <li>&copy; 2019 Wlka</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://zhwangart.github.io">zhwangart</a></li>
+      <li><i class="fe fe-bar-chart"></i> <span id="busuanzi_value_site_pv"></span></li>
+      <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+    </ul>
+  </div>
+</footer>
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="Wlka"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">About</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+<!-- 
+  <script src="/js/search.js"></script>
+ -->
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
