@@ -55,10 +55,10 @@
       
         <ul>
 <li><p>const在星号左边，例如const int <em>p，不可以通过</em>p来修改指向位置的数据,但是可以修改p指向的地址  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int a=5,b=0;</span><br><span class="line">const int *p=&amp;a;</span><br><span class="line">*p=10;  //not allowed</span><br><span class="line">*p=&amp;b;  //allowed</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a=<span class="number">5</span>,b=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *p=&amp;a;</span><br><span class="line">*p=<span class="number">10</span>;  <span class="comment">//not allowed</span></span><br><span class="line">*p=&amp;b;  <span class="comment">//allowed</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>const在星号右边，例如int<em> const q,可以通过修改</em>q来修改指向位置的数据，但是不可以修改q指向的地址  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int a=5,b=0;</span><br><span class="line">int * const q=&amp;a;</span><br><span class="line">*q=10;  //allowed</span><br><span class="line">*q=&amp;b;  //not allowed</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a=<span class="number">5</span>,b=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> * <span class="keyword">const</span> q=&amp;a;</span><br><span class="line">*q=<span class="number">10</span>;  <span class="comment">//allowed</span></span><br><span class="line">*q=&amp;b;  <span class="comment">//not allowed</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <hr>
@@ -70,7 +70,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/02/23/关于const/" data-id="cjsj0ld8e0002pkuy5tzbv04i" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/02/23/关于const/" data-id="cjsq01gsp0001n8uy3g6d6xza" class="article-share-link">Share</a>
       
     </footer>
 
