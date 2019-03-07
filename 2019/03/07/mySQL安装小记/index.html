@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  
+    <meta name="description" content="Welcome to my blog">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    mySQL安装小记 |
+    
+    Wlka</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-mySQL安装小记" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      mySQL安装小记
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/03/07/mySQL安装小记/" class="article-date">
+  <time datetime="2019-03-07T12:15:57.000Z" itemprop="datePublished">2019-03-07</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+        <p>今天搭建了mySQL环境，想着准备学一下怎么用QT操作数据库，期间遇到了些小问题，现在来记录一下</p>
+<h4 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h4><ul>
+<li>首先我们先去<a href="https://www.mysql.com/cn/" target="_blank" rel="noopener">mySQL</a>官网下载对应的版本，这里我们选择<a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">社区版</a>，然后选择一个路径把压缩包解压，在路径目录下新建一个my.ini配置文件，记事本打开后输入以下内容<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[mysql]</span><br><span class="line"># 设置mysql客户端默认字符集</span><br><span class="line">default-character-set=utf8</span><br><span class="line"> </span><br><span class="line">[mysqld]</span><br><span class="line"># 设置3306端口</span><br><span class="line">port = 3306</span><br><span class="line"># 设置mysql的安装目录</span><br><span class="line">basedir=C:\\web\\mysql-8.0.11</span><br><span class="line"># 设置 mysql数据库的数据的存放目录，MySQL 8+ 不需要以下配置，系统自己生成即可，否则有可能报错</span><br><span class="line"># datadir=C:\\web\\sqldata</span><br><span class="line"># 允许最大连接数</span><br><span class="line">max_connections=20</span><br><span class="line"># 服务端使用的字符集默认为8比特编码的latin1字符集</span><br><span class="line">character-set-server=utf8</span><br><span class="line"># 创建新表时将使用的默认存储引擎</span><br><span class="line">default-storage-engine=INNODB</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><ul>
+<li><p>接下来，我们开始配置环境，管理员身份打开cmd，并切换到你刚才解压文件的路径下，按步骤执行以下操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysqld --initialize --console   #初始化数据库</span><br><span class="line"></span><br><span class="line">#命令执行完毕后，会输出root的初始密码</span><br><span class="line">2018-04-20T02:35:05.464644Z 5 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: APWCY5ws&amp;hjQ</span><br><span class="line">#这里的APWCY5ws&amp;hjQ就是密码，之后的登录操作会用到</span><br><span class="line"></span><br><span class="line">mysqld install      #安装</span><br><span class="line">net start mysql     #启动服务</span><br><span class="line"></span><br><span class="line">mysql -h 主机名 -u 用户名 -p    #h为要登录的主机名，默认为localhost，可忽略；u为用户名；p为密码</span><br><span class="line">#输入命令后回车，会提示你输入密码，这时候就输入上面的默认root密码</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>到这里还没有结束，需要修改默认的root密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; alter user &apos;用户名&apos;@&apos;主机名&apos; identified by &apos;新密码&apos;;   #要修改root密码，这里的主机名填localhost</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>到这里基本的配置就完毕了，mySQL有不少图形化窗口软件支持，例如<a href="https://www.navicat.com/en/" target="_blank" rel="noopener">Navicat</a>这里就不赘述了，结合需要去使用，注意，在条件允许的情况下，记得<font color="red">支持正版</font>哦~</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://Wlka.github.io/2019/03/07/mySQL安装小记/" data-id="cjsymbpu10001f4uylbmp6ngw" class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2019/03/01/cpp类中重载运算符/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">c++类中重载运算符</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  
+  <div class="outer">
+    <ul class="list-inline">
+      <li>&copy; 2019 Wlka</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://zhwangart.github.io">zhwangart</a></li>
+      <li><i class="fe fe-bar-chart"></i> <span id="busuanzi_value_site_pv"></span></li>
+      <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+    </ul>
+  </div>
+</footer>
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="Wlka"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+<!-- 
+  <script src="/js/search.js"></script>
+ -->
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
