@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  
+    <meta name="description" content="Welcome to my blog">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    iData常用基本数据类型 |
+    
+    Wlka</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-iData基本数据类型" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iData常用基本数据类型
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/02/24/iData基本数据类型/" class="article-date">
+  <time datetime="2019-02-24T07:47:51.982Z" itemprop="datePublished">2019-02-24</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+        <ul>
+<li><p>DoubleList<br>– iData的浮点数数组</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> PyiData <span class="keyword">as</span> pid   <span class="comment">#以下代码都用pid代替</span></span><br><span class="line">ls=pid.DoubleList()</span><br><span class="line">ls.append(<span class="number">12</span>)           <span class="comment">#添加数据</span></span><br><span class="line">ls.size()               <span class="comment">#获取数据数量</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>String<br>– iData的字符串，默认编码为UTF-8</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">str=pid.String()    <span class="comment">#设置str为PyiData中的String类型</span></span><br><span class="line">str.setValue(<span class="string">'abc'</span>) <span class="comment">#设置str的数据，也可以在上一句中直接设置</span></span><br><span class="line">可通过setValueGBK()方法设置GBK编码的数据</span><br><span class="line"></span><br><span class="line">example:</span><br><span class="line">e=pid.iDataInitGet(<span class="number">1</span>,<span class="string">'Y N I'</span>)</span><br><span class="line">e,s=pid.iDataGetString(<span class="string">'确认[Y]/取消[N]/忽略[I]/请输入选择: '</span>)</span><br><span class="line"><span class="keyword">if</span> e==pid.iData.eOk <span class="keyword">or</span> e==pid.iData.eKWord: <span class="comment">#eOk指按下回车，eKWord指按下按键</span></span><br><span class="line">    print(s)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">'用户放弃选择'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Variant<br>– iData的可变数据类型，可通过setValue来设置不同的类型数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">v=pid.Variant()</span><br><span class="line">v.setValue()</span><br><span class="line"><span class="comment">#设置数据后，可通过对应的to方法显示对象v的数据</span></span><br><span class="line">v.toString() v.toDouble() v.toPoint3D()...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Point3D Point3DList Point3DListList<br>– 点的三维坐标、坐标点数组(一维)、坐标点数组的集合(二维)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">p=pid.Point3D(<span class="number">100</span>,<span class="number">100</span>,<span class="number">0</span>)</span><br><span class="line">p.setXYZ(<span class="number">100</span>,<span class="number">100</span>,<span class="number">0</span>)</span><br><span class="line">p.x() p.y() p.z()   <span class="comment">#分别获取对应的xyz坐标</span></span><br><span class="line"><span class="comment">#可以进行加操作：p3=p1+p2</span></span><br><span class="line"><span class="comment">#可以进行比较操作：p1==p2</span></span><br><span class="line"></span><br><span class="line">p1=pid.Point3DList()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">    p=pid.Point3D(<span class="number">100</span>,<span class="number">100</span>,<span class="number">0</span>)</span><br><span class="line">    p1.append(p)    <span class="comment">#只能传入对象</span></span><br><span class="line"></span><br><span class="line">p2=pid.point3DListList()</span><br><span class="line">p2.append(p1)</span><br><span class="line"></span><br><span class="line">Point基本用法</span><br><span class="line">example:</span><br><span class="line">e,point1=pid.iDataGetPoint(<span class="string">'获取图面上一个点:'</span>)  <span class="comment">#e为状态，point1为选定点的坐标</span></span><br><span class="line">e,point2=pid.iDataGetPoint2(point1,<span class="string">'获取图面上第二个点:'</span>)  <span class="comment">#e为状态，point2为选定点的坐标</span></span><br><span class="line">e,point3=pid.iDataGetCorner(point1,<span class="string">'在图面上拉框选择第二个点:'</span>)  <span class="comment">#e为状态，point3为选定点的坐标</span></span><br><span class="line"><span class="keyword">if</span> point3.x()&lt;point1.x()</span><br><span class="line">    print(<span class="string">'右拉框(第一个点在第二点右边)'</span>)</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    print(<span class="string">'左拉框(第一个点在第二点左边)'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Rect<br>– 矩形</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">r=pid.Rect(<span class="number">0</span>,<span class="number">0</span>,<span class="number">100</span>,<span class="number">200</span>) <span class="comment">#x起点 y起点 宽 高</span></span><br><span class="line">r.xp() r.yp() r.w() r.h()</span><br><span class="line">r.center()  <span class="comment">#中心点坐标</span></span><br><span class="line">r.bottomRight() <span class="comment">#右下角点坐标</span></span><br><span class="line"></span><br><span class="line">p=pid.Point3D(<span class="number">50</span>,<span class="number">50</span>,<span class="number">0</span>)</span><br><span class="line">print(r.containsPoint(p))   <span class="comment">#查看点p是否在矩形r内</span></span><br><span class="line"></span><br><span class="line">r2=pid.Rect(<span class="number">0</span>,<span class="number">0</span>,<span class="number">20</span>,<span class="number">50</span>)</span><br><span class="line">print(r.contains(p))   <span class="comment">#查看矩形r2是否在矩形r内</span></span><br><span class="line">print(r.intersects(r2))     <span class="comment">#查看矩形r和r2是否相交</span></span><br><span class="line"></span><br><span class="line">r2.setTopLeft(<span class="number">0</span>,<span class="number">0</span>)  <span class="comment">#设置左上角点</span></span><br><span class="line">r2.setSize(<span class="number">100</span>,<span class="number">100</span>) <span class="comment">#设置尺寸</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Color<br>– 颜色</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c=pid.Color(<span class="number">255</span>,<span class="number">255</span>,<span class="number">0</span>,<span class="number">255</span>)  <span class="comment">#R G B A</span></span><br><span class="line">c.r c.g c.b c.a</span><br><span class="line">c1=pid.backgroundColor()    <span class="comment">#获取当前背景色</span></span><br><span class="line">pid.setBackgroundColor(c)    <span class="comment">#设置背景色,只接收对象</span></span><br><span class="line">c0=pid.iData_GetColor(<span class="number">0</span>)    <span class="comment">#获取索引色</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://Wlka.github.io/2019/02/24/iData基本数据类型/" data-id="cjt06hpzv00001cuyok3z43pc" class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2019/02/24/搭建博客/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            用github+Hexo搭建个人博客
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2019/02/24/hello-world/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">Hello World</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  
+  <div class="outer">
+    <ul class="list-inline">
+      <li>&copy; 2019 Wlka</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://zhwangart.github.io">zhwangart</a></li>
+      <li><i class="fe fe-bar-chart"></i> <span id="busuanzi_value_site_pv"></span></li>
+      <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+    </ul>
+  </div>
+</footer>
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="Wlka"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+<!-- 
+  <script src="/js/search.js"></script>
+ -->
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

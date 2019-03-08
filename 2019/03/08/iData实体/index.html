@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  
+    <meta name="description" content="Welcome to my blog">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    iData实体 |
+    
+    Wlka</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-iData实体" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iData实体
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/03/08/iData实体/" class="article-date">
+  <time datetime="2019-03-08T14:50:01.000Z" itemprop="datePublished">2019-03-08</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+        <h4 id="实体"><a href="#实体" class="headerlink" title="实体"></a>实体</h4><ul>
+<li>iData图面上的点、线、面、文字注记、影像等元素<br>分别为iDataPoint、iDataPolyline、iDataPolygon、iDataText、iDataImage，它们都继承自iDataEntity类<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">e,entity,point=pid.iDataEntSel(<span class="string">'select an entity you want to check: '</span>)</span><br><span class="line"><span class="comment">#iDataEntSel方法用来选择一个实体，返回三参数，后两个分别是实体以及选定点的坐标</span></span><br><span class="line"><span class="keyword">if</span> e==pid.iData.eOk:</span><br><span class="line">  t=entity.type()   <span class="comment">#实体类型</span></span><br><span class="line">  print(e)</span><br><span class="line">  print(entity)</span><br><span class="line">  print(point)</span><br><span class="line">  <span class="keyword">if</span> t==pid.iData.IDATAPOINT:</span><br><span class="line">    print(<span class="string">'point'</span>)</span><br><span class="line">  <span class="keyword">elif</span> t==pid.iData.IDATAPOLYLINE:</span><br><span class="line">    print(<span class="string">'line'</span>)</span><br><span class="line">  <span class="keyword">elif</span> t==pid.iData.IDATAPOLYGON:</span><br><span class="line">    print(<span class="string">'gon'</span>)</span><br><span class="line">  <span class="keyword">elif</span> t==pid.iData.IDATATEXT:</span><br><span class="line">    print(<span class="string">'text'</span>)</span><br><span class="line">  <span class="keyword">elif</span> t==pid.iData.IDATAIMAGE:</span><br><span class="line">    print(<span class="string">'image'</span>)</span><br><span class="line">  <span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">"I don't know what is this..."</span>)</span><br><span class="line">  </span><br><span class="line">    </span><br><span class="line">  nodes,bulges=entity.getNodes()  <span class="comment">#取得实体节点</span></span><br><span class="line">  <span class="comment">#两个参数的类型都是ListList</span></span><br><span class="line">  print(<span class="string">'实体由&#123;&#125;部分组成'</span>.format(nodes.size()))</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nodes)):</span><br><span class="line">    print(<span class="string">'&#123;&#125;部分包含&#123;&#125;个节点'</span>.format(i+<span class="number">1</span>,len(nodes[i])))</span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> nodes[i]:</span><br><span class="line">      print(p)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  print(<span class="string">'esc'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="实体几何"><a href="#实体几何" class="headerlink" title="实体几何"></a>实体几何</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建点实体</span></span><br><span class="line">geoCode=pid.getDeFaultGeoCode(pid.iData.IDATAPOINT) <span class="comment">#获取默认点编码</span></span><br><span class="line">pos=pid.Point3D(<span class="number">250</span>,<span class="number">250</span>,<span class="number">3.14</span>) <span class="comment">#给定点坐标</span></span><br><span class="line">entity=pid.iDataPoint(geoCode,pos)  <span class="comment">#创建一个点实体</span></span><br><span class="line"></span><br><span class="line">pid.iDataAppendEntity(entity) <span class="comment">#将实体提交到图面</span></span><br><span class="line">pid.CommitEntity(entity,pid.iData.kAppended)  <span class="comment">#提交到数据库</span></span><br><span class="line"></span><br><span class="line">pid.iDataRegen(<span class="keyword">None</span>,<span class="keyword">True</span>) <span class="comment">#刷新图面</span></span><br><span class="line"></span><br><span class="line">-----------------------------------------------------------</span><br><span class="line"><span class="comment">#创建线实体</span></span><br><span class="line">arrNodes=pid.Point3DListList()  <span class="comment">#节点列表</span></span><br><span class="line">arrBulges=pid.DoubleListList()  <span class="comment">#凸度列表，如不需要留空即可</span></span><br><span class="line"></span><br><span class="line">posList=pid.Point3DList() <span class="comment">#坐标列表</span></span><br><span class="line">posList.append(pid.Point3D(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line">posList.append(pid.Point3D(<span class="number">1000</span>,<span class="number">250</span>,<span class="number">0</span>))</span><br><span class="line">posList.append(pid.Point3D(<span class="number">500</span>,<span class="number">1000</span>,<span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">arrNodes.append(posList)</span><br><span class="line"></span><br><span class="line">geoCode=pid.getDeFaultGeoCode(pid.iData.IDATAPOLYLINE)</span><br><span class="line">entity=pid.iDataPolyline(geoCode,arrNodes,arrBulges)</span><br><span class="line"></span><br><span class="line">pid.iDataAppendEntity(entity) <span class="comment">#实体提交到图面</span></span><br><span class="line">pid.CommitEntity(entity,pid.iData.kAppended)  <span class="comment">#实体提交到数据库</span></span><br><span class="line">pid.iDataRegen(<span class="keyword">None</span>,<span class="keyword">True</span>) <span class="comment">#刷新图面</span></span><br><span class="line"></span><br><span class="line">-----------------------------------------------------------</span><br><span class="line"><span class="comment">#创建面实体</span></span><br><span class="line">arrNodes=pid.Point3DListList()  <span class="comment">#节点列表</span></span><br><span class="line">arrBulges=pid.DoubleListList()  <span class="comment">#凸度列表，如不需要留空即可</span></span><br><span class="line"></span><br><span class="line">posList=pid.Point3DList() <span class="comment">#坐标列表</span></span><br><span class="line"><span class="comment">#构建多边形需要闭合</span></span><br><span class="line">posList.append(pid.Point3D(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line">posList.append(pid.Point3D(<span class="number">250</span>,<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line">posList.append(pid.Point3D(<span class="number">0</span>,<span class="number">250</span>,<span class="number">0</span>))</span><br><span class="line">posList.append(pid.Point3D(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">arrNodes.append(posList)</span><br><span class="line"></span><br><span class="line"><span class="comment">#获取默认面编码，并创建实体</span></span><br><span class="line">geoCode=pid.getDeFaultGeoCode(pid.iData.IDATAPOLYGON)</span><br><span class="line">entity=pid.iDataPolygon(geoCode,arrNodes,arrBulges)</span><br><span class="line"></span><br><span class="line">pid.iDataAppendEntity(entity) <span class="comment">#实体提交到图面</span></span><br><span class="line">pid.CommitEntity(entity,pid.iData.kAppended)  <span class="comment">#实体提交到数据库</span></span><br><span class="line">pid.iDataRegen(<span class="keyword">None</span>,<span class="keyword">True</span>) <span class="comment">#刷新图面</span></span><br></pre></td></tr></table></figure>
+<h4 id="实体凸度"><a href="#实体凸度" class="headerlink" title="实体凸度"></a>实体凸度</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建一个圆</span></span><br><span class="line">arrNodes=pid.Point3DListList()  <span class="comment">#节点列表</span></span><br><span class="line">arrBulges=pid.DoubleListList()  <span class="comment">#凸度列表，如不需要留空即可</span></span><br><span class="line"></span><br><span class="line">posList=pid.Point3DList() <span class="comment">#坐标列表</span></span><br><span class="line">posList.append(pid.Point3D(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line">posList.append(pid.Point3D(<span class="number">300</span>,<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line">posList.append(pid.Point3D(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>))</span><br><span class="line">arrNodes.append(posList)</span><br><span class="line"></span><br><span class="line"><span class="comment">#这里使用凸度控制弧线，凸度=tan(圆心角)/4</span></span><br><span class="line">bList=pid.DoubleList()</span><br><span class="line"><span class="comment">#bList.fromList([1,1,0])</span></span><br><span class="line">bList.append(<span class="number">1</span>)</span><br><span class="line">bList.append(<span class="number">1</span>)</span><br><span class="line">bList.append(<span class="number">0</span>)</span><br><span class="line">arrBulges.append(bList)</span><br><span class="line"></span><br><span class="line"><span class="comment">#获取默认线编码，并创建实体</span></span><br><span class="line">geoCode=pid.getDeFaultGeoCode(pid.iData.IDATAPOLYLINE)</span><br><span class="line">entity=pid.iDataPolygon(geoCode,arrNodes,arrBulges)</span><br><span class="line"></span><br><span class="line">pid.iDataAppendEntity(entity) <span class="comment">#实体提交到图面</span></span><br><span class="line">pid.CommitEntity(entity,pid.iData.kAppended)  <span class="comment">#实体提交到数据库</span></span><br><span class="line">pid.iDataRegen(<span class="keyword">None</span>,<span class="keyword">True</span>) <span class="comment">#刷新图面</span></span><br></pre></td></tr></table></figure>
+<h4 id="实体属性"><a href="#实体属性" class="headerlink" title="实体属性"></a>实体属性</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">e,entity,point=pid.iDataEntSel(<span class="string">'Select an entity'</span>)</span><br><span class="line"><span class="keyword">if</span> e==pid.iData.eOk:</span><br><span class="line">  propertys=entity.getXDataAll()  <span class="comment">#实体所有扩展属性</span></span><br><span class="line">  bz=entity.getXData(<span class="string">'WYBZ'</span>)  <span class="comment">#取出特定扩展属性</span></span><br><span class="line">  <span class="keyword">if</span> bz.type()==pid.Variant.Type_Invalid:</span><br><span class="line">    print(<span class="string">'选中实体不存在WYBZ字段'</span>)</span><br><span class="line">  print(<span class="string">'原始值: '</span>+entity.getXData(<span class="string">'GD'</span>).toString())</span><br><span class="line">  bz_new=pid.Variant()</span><br><span class="line">  bz_new.setValue(<span class="string">'设置新值'</span>)</span><br><span class="line">  entity.setXData(<span class="string">'WYBZ'</span>,bz_new)  <span class="comment">#设置新值</span></span><br><span class="line">  print(<span class="string">'修改值: '</span>+entity.getXData(<span class="string">'GD'</span>).toString())</span><br><span class="line">  entity.setSelected(<span class="keyword">True</span>)  <span class="comment">#让选择的实体显示出来</span></span><br><span class="line">  pid.COmmitEntity(entity,pid.iData.kModified)  <span class="comment">#修改提交到数据库</span></span><br><span class="line">  pid.iDataRegen(<span class="keyword">None</span>,<span class="keyword">True</span>) <span class="comment">#刷新图面</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  print(<span class="string">'The selected entity has &#123;&#125; propertys'</span>.format(len(propertys)))</span><br><span class="line">  <span class="keyword">for</span> k,v <span class="keyword">in</span> propertys:</span><br><span class="line">    print(k,<span class="string">': '</span>,v.toString())</span><br><span class="line">  p=propertys[<span class="string">'CODE'</span>]</span><br><span class="line">  print(p)</span><br><span class="line">  <span class="comment">#print(propertys['CODE'].toString()) #同样为取属性</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  print(<span class="string">'esc'</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在iData中增删改了实体都需要提交才能生效，分别是提交到图面(按需调用iDataAppendEntity、iDataEntDel)、提交到数据库(调用Commit方法)<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#点实体实例</span></span><br><span class="line">count=<span class="number">100</span></span><br><span class="line">entityList=pid.iDataEntityList()</span><br><span class="line">geoCode=pid.getDeFaultGeoCode(pid.iData.IDATAPOINT)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(count):</span><br><span class="line">  <span class="keyword">for</span> j <span class="keyword">in</span> range(count):</span><br><span class="line">    pos=pid.Point3D(i*<span class="number">10</span>,j*<span class="number">10</span>,<span class="number">0</span>)</span><br><span class="line">    point=pid.iDataPoint(geoCode,pos)</span><br><span class="line">    entityList.append(point)</span><br><span class="line"><span class="comment">#提交实体到图面</span></span><br><span class="line">err=pid.iDataAppendEntity(entityList)</span><br><span class="line"><span class="keyword">if</span> err==pid.iData.eOk:</span><br><span class="line">  print(<span class="string">'添加了&#123;&#125;个实体到屏幕'</span>.format(entityList.size()))</span><br><span class="line">err=pid.CommitEntity(entityList,pid.iData.kAppended)</span><br><span class="line"><span class="keyword">if</span> err==pid.iData.eOk:</span><br><span class="line">  print(<span class="string">'添加了&#123;&#125;个实体到数据库'</span>.format(entityList.size()))</span><br><span class="line">pid.iDataRegen(<span class="keyword">None</span>,<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#线实体实例</span></span><br><span class="line">arrNodes=pid.Point3DListList()</span><br><span class="line">arrBulges=pid.DoubleListList()</span><br><span class="line"></span><br><span class="line"><span class="comment">#曲线第一部分，绘制正弦曲线</span></span><br><span class="line">posList=pid.Point3DList()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">628</span>,<span class="number">2</span>):</span><br><span class="line">  y=<span class="number">100</span>*math.sin(i/<span class="number">100.0</span>)</span><br><span class="line">  pos=pid.Point3D(i,y,<span class="number">0</span>)</span><br><span class="line">  posList.append(pos)</span><br><span class="line">arrNodes.append(posList)</span><br><span class="line"></span><br><span class="line"><span class="comment">#曲线第一部分，绘制余弦曲线</span></span><br><span class="line">posList=pid.Point3DList()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">628</span>,<span class="number">2</span>):</span><br><span class="line">  y=<span class="number">100</span>*math.cos(i/<span class="number">100.0</span>)</span><br><span class="line">  pos=pid.Point3D(i,y,<span class="number">0</span>)</span><br><span class="line">  posList.append(pos)</span><br><span class="line">arrNodes.append(posList)</span><br><span class="line"></span><br><span class="line">geoCode=pid.getDeFaultGeoCode(pid.iData.IDATAPOLYLINE)</span><br><span class="line">entityList=pid.iDataPolyline(geoCode,arrNodes,arrBulges)</span><br><span class="line"></span><br><span class="line"><span class="comment">#提交实体到图面</span></span><br><span class="line">err=pid.iDataAppendEntity(entityList)</span><br><span class="line">err=pid.CommitEntity(entityList,pid.iData.kAppended)</span><br><span class="line"></span><br><span class="line"><span class="comment">#添加说明文字</span></span><br><span class="line">geoCode=pid.getDeFaultGeoCode(pid.iData.IDATATEXT)</span><br><span class="line">entity=pid.iDataText(geoCode,pid.Point3D(<span class="number">10</span>,<span class="number">-10</span>,<span class="number">0</span>),<span class="string">'y=sin(x)'</span>)  <span class="comment">#设置文字注记的位置</span></span><br><span class="line">entity.setFamily(<span class="string">'微软雅黑'</span>)  <span class="comment">#设置字体</span></span><br><span class="line">entity.setPointSizeF(<span class="number">18</span>*<span class="number">4.0654228942042955</span>) <span class="comment">#设置字高(需要乘以一个固定比例)</span></span><br><span class="line">entity.setItalic(<span class="keyword">True</span>)</span><br><span class="line">pid.iDataAppendEntity(entity)</span><br><span class="line">pid.CommitEntity(entity,pid.iData.kAppended)</span><br><span class="line"></span><br><span class="line">pid.iDataRegen(<span class="keyword">None</span>,<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://Wlka.github.io/2019/03/08/iData实体/" data-id="cjt06hq1500011cuyv2ekhnoq" class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2019/03/07/mySQL安装小记/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">mySQL安装小记</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  
+  <div class="outer">
+    <ul class="list-inline">
+      <li>&copy; 2019 Wlka</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://zhwangart.github.io">zhwangart</a></li>
+      <li><i class="fe fe-bar-chart"></i> <span id="busuanzi_value_site_pv"></span></li>
+      <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+    </ul>
+  </div>
+</footer>
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="Wlka"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+<!-- 
+  <script src="/js/search.js"></script>
+ -->
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
