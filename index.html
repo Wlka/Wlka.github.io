@@ -58,6 +58,57 @@
 
     
       
+        <article id="post-cpp-STL" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/03/10/cpp-STL/">cpp-STL</a>
+    </h2>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/03/10/cpp-STL/" class="article-date">
+  <time datetime="2019-03-10T15:08:10.000Z" itemprop="datePublished">2019-03-10</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+        <h3 id="STL-forward-list"><a href="#STL-forward-list" class="headerlink" title="STL-forward_list"></a>STL-forward_list</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;forward_list&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    forward_list&lt;<span class="keyword">int</span>&gt; arr;</span><br><span class="line">    arr.assign(&#123;<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>&#125;);  <span class="comment">//分配数据</span></span><br><span class="line">    arr.assign(<span class="number">5</span>,<span class="number">10</span>);       <span class="comment">//分配5个重复的数据(会覆盖之前的)</span></span><br><span class="line">    </span><br><span class="line">    arr.push_front(<span class="number">1</span>);  <span class="comment">//在arr前面插入数据</span></span><br><span class="line">    arr.pop_front();    <span class="comment">//删除arr前面一个数据，返回值为void</span></span><br><span class="line"></span><br><span class="line">    arr.emplace_front(<span class="number">1</span>);   <span class="comment">//在arr前面插入一个数据</span></span><br><span class="line">    </span><br><span class="line">    forward_list&lt;<span class="keyword">int</span>&gt;::iterator a=arr.begin();  <span class="comment">//一个指向arr头位置的迭代器指针</span></span><br><span class="line">    arr.emplace_after(a,<span class="number">10</span>);  <span class="comment">//emplace_after方法需要两个参数，第一个是迭代器指针，第二个是数据，返回一个迭代器指针</span></span><br><span class="line">    </span><br><span class="line">    arr.insert_after(a,<span class="number">10</span>); <span class="comment">//insert_after方法需要两个参数，第一个是迭代器指针，第二个是数据，返回一个迭代器指针</span></span><br><span class="line">    </span><br><span class="line">    arr.erase_after(a);     <span class="comment">//删除迭代器指针后的一个数据</span></span><br><span class="line">    </span><br><span class="line">    arr.remove(<span class="number">1</span>);  <span class="comment">//删除arr中的所有值为1的数据</span></span><br><span class="line"></span><br><span class="line">    arr.remove_if([](<span class="keyword">int</span> m)&#123;<span class="keyword">return</span> m%<span class="number">2</span>;&#125;)   <span class="comment">//删除符合函数条件的数据，remove_if参数为一个函数</span></span><br><span class="line"></span><br><span class="line">    forward_list&lt;<span class="keyword">int</span>&gt; arr2;</span><br><span class="line">    arr2.assgin(&#123;<span class="number">1</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">9</span>&#125;);</span><br><span class="line">    arr.splice_after(arr.begin(),arr2,arr2.begin(),arr2.end()); <span class="comment">//用于拼接两个链表，有四个参数，分别是被拼接链表的迭代器指针，拼接的链表，拼接链表的起始位置，拼接链表的终止位置；第三个参数为begin时不包括拼接内容的第一个位置，为before_begin时包括第一个位置</span></span><br><span class="line"></span><br><span class="line">    arr.front();    <span class="comment">//返回arr第一个元素</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*----------------------------------------------</span></span><br><span class="line"><span class="comment">      这里提一下begin、end和cbegin、cend的区别:</span></span><br><span class="line"><span class="comment">      四个方法返回的都是一个迭代器指针，但是c开头的方法返回的是const内容，不能通过它们修改容器里的内容，但是可以移动该指针</span></span><br><span class="line"><span class="comment">    ----------------------------------------------*/</span></span><br><span class="line"></span><br><span class="line">    arr.max_size(); <span class="comment">//返回arr能存入的元素最大值</span></span><br><span class="line"></span><br><span class="line">    arr.resize(n);   <span class="comment">//修改arr的容量，当前容量大于n，删除大于部分；小于n，用0补全</span></span><br><span class="line"></span><br><span class="line">    forward_list&lt;<span class="keyword">int</span>&gt;::iterator b;  <span class="comment">//迭代器</span></span><br><span class="line">    <span class="keyword">for</span>(b=arr.begin();b!=arr.end();++b) <span class="comment">//通过迭代器实现遍历</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;*b&lt;&lt;<span class="string">" "</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="STL-array"><a href="#STL-array" class="headerlink" title="STL-array"></a>STL-array</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;array&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;tuple&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">array</span>&lt;<span class="keyword">int</span>,5&gt;arr=&#123;<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>&#125;;	<span class="comment">//指定数组的类型和容量，可以之后再指定元素</span></span><br><span class="line">    <span class="built_in">array</span>&lt;<span class="keyword">int</span>,5&gt; arr2;</span><br><span class="line">    </span><br><span class="line">    arr2.fill(<span class="number">0</span>);	<span class="comment">//fill方法将数组内元素全部置为指定值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;++i)</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;arr2[i]&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    arr2=&#123;<span class="number">4</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">6</span>,<span class="number">8</span>&#125;;</span><br><span class="line"></span><br><span class="line">    arr.swap(arr2);	<span class="comment">//交换两个数组，两个数组容量要相等</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;++i)</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;arr[i]&lt;&lt;<span class="string">" "</span>&lt;&lt;arr2[i]&lt;&lt;<span class="string">"\t"</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;++i)	<span class="comment">//at方法可访问指定的位置元素</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"arr.at("</span>&lt;&lt;i&lt;&lt;<span class="string">"): "</span>&lt;&lt;arr.at(i)&lt;&lt;<span class="string">"\tarr["</span>&lt;&lt;i&lt;&lt;<span class="string">"]: "</span>&lt;&lt;arr[i]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"arr.size(): "</span>&lt;&lt;arr.size()&lt;&lt;<span class="built_in">endl</span>;	<span class="comment">//返回数组元素总和</span></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"arr.max_size(): "</span>&lt;&lt;arr.max_size()&lt;&lt;<span class="built_in">endl</span>;	<span class="comment">//返回数组最大容量</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"get&lt;0&gt;(arr): "</span>&lt;&lt;get&lt;<span class="number">0</span>&gt;(arr)&lt;&lt;<span class="built_in">endl</span>;	<span class="comment">//get方法重载自tuple，arry内没有，指定要访问的位置和相应的数组</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"arr.front(): "</span>&lt;&lt;arr.front()&lt;&lt;<span class="built_in">endl</span>;	<span class="comment">//返回数组第一位元素</span></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"arr.back(): "</span>&lt;&lt;arr.back()&lt;&lt;<span class="built_in">endl</span>;		<span class="comment">//返回数组末尾元素</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;arr.empty()&lt;&lt;<span class="built_in">endl</span>;	<span class="comment">//判断数组是否为空</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="STL-vector"><a href="#STL-vector" class="headerlink" title="STL-vector"></a>STL-vector</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;++i)</span><br><span class="line">        vec.push_back(i);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> i=vec.begin();i!=vec.end();++i)	<span class="comment">//迭代器指针</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;*i&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> i=vec.cbegin();i!=vec.cend();++i)	<span class="comment">//const迭代器指针</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;*i&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> i=vec.rbegin();i!=vec.rend();++i)	<span class="comment">//reverse，一个逆序指针</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;*i&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> i=vec.crbegin();i!=vec.crend();++i)	<span class="comment">//const一个逆序指针</span></span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;*i&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;vec.size()&lt;&lt;<span class="built_in">endl</span>;	<span class="comment">//vec的当前元素总数量</span></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;vec.max_size()&lt;&lt;<span class="built_in">endl</span>;	<span class="comment">//vec的能容纳最大元素数量</span></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;vec.capacity()&lt;&lt;<span class="built_in">endl</span>;	<span class="comment">//vec当前分配的容量，若超过容量，对成倍增加容量</span></span><br><span class="line"></span><br><span class="line">    vec.resize(<span class="number">2</span>);	<span class="comment">//将vec元素数量置为指定值，多于指定容量部分不会删除，但是通过迭代器无法访问，能通过[]访问，若不多于则用0补全</span></span><br><span class="line">    vec.shrink_to_fit();	<span class="comment">//将resize后多于容量的部分删除</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;vec.empty()&lt;&lt;<span class="built_in">endl</span>;	<span class="comment">//判空</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec2;</span><br><span class="line">    vec2.reserve(<span class="number">5</span>);	<span class="comment">//要求vec2至少能填满5个元素，如果默认容量少于指定数值，会再分配默认容量，否则不会再分配(经过reserve后，插入元素的速度会变快)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/***********************************************************</span></span><br><span class="line"><span class="comment">        *	vector的[]、at、front、back、assgin、push_back、</span></span><br><span class="line"><span class="comment">        *	pop_back、insert、erase、swap、emplace、emplace_back等方法用法跟array一样</span></span><br><span class="line"><span class="comment">    ***********************************************************/</span></span><br><span class="line">    vec.clear();		<span class="comment">//清空vec</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://Wlka.github.io/2019/03/10/cpp-STL/" data-id="cjt31zyny0000nwuy9zybzcrg" class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpp/">cpp</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
         <article id="post-iData实体" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
@@ -100,7 +151,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/03/08/iData实体/" data-id="cjt06hq1500011cuyv2ekhnoq" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/03/08/iData实体/" data-id="cjt31zyqz0004nwuykeuc4l3n" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
@@ -163,7 +214,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/03/07/mySQL安装小记/" data-id="cjt06hq1500031cuyxgjweht8" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/03/07/mySQL安装小记/" data-id="cjt31zysa000fnwuyufqxahu1" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
 
@@ -220,7 +271,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/03/01/cpp类中重载运算符/" data-id="cjt06hq47000g1cuygmkqft31" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/03/01/cpp类中重载运算符/" data-id="cjt31zysa000inwuym6jkhei0" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpp/">cpp</a></li></ul>
 
@@ -288,7 +339,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/02/24/搭建博客/" data-id="cjt06hq3r000d1cuyrh5d1t24" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/02/24/搭建博客/" data-id="cjt31zyrf0008nwuyjvofrgrw" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客搭建/">博客搭建</a></li></ul>
 
@@ -357,7 +408,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/02/24/iData基本数据类型/" data-id="cjt06hpzv00001cuyok3z43pc" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/02/24/iData基本数据类型/" data-id="cjt31zyqz0003nwuy2r3zrlni" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
@@ -415,7 +466,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/02/24/hello-world/" data-id="cjt06hq1l00041cuymkc867lr" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/02/24/hello-world/" data-id="cjt31zyrf0006nwuyh6i8xfvv" class="article-share-link">Share</a>
       
     </footer>
 
@@ -475,7 +526,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/02/23/关于const/" data-id="cjt06hq21000a1cuygadmkiat" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/02/23/关于const/" data-id="cjt31zyrf0007nwuyr9ta11fo" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpp/">cpp</a></li></ul>
 
