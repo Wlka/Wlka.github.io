@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  
+    <meta name="description" content="Welcome to my blog">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    iData习题课 |
+    
+    Wlka</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-iData习题课" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iData习题课
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/04/13/iData习题课/" class="article-date">
+  <time datetime="2019-04-13T04:26:17.000Z" itemprop="datePublished">2019-04-13</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+        <h3 id="Python命令注册"><a href="#Python命令注册" class="headerlink" title="Python命令注册"></a>Python命令注册</h3><blockquote>
+<p>函数有三个参数: modelName(模块名或文件名)、methodName(无参函数名称)、message(命令提示信息)<br>注意: 注册命令后需要设置文件下次自动加载，重启iData后才有效果<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#filename: myDemo.py</span></span><br><span class="line"><span class="keyword">from</span> AddCommand <span class="keyword">import</span> AddCommand</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pyMyPrint</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"hello world"</span>)</span><br><span class="line"></span><br><span class="line">AddCommand(<span class="string">'myDemo'</span>,<span class="string">'pyMyPrint'</span>,<span class="string">'Python打印'</span>)</span><br><span class="line"><span class="comment">#           模块名      函数名          函数说明</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="Python文件加密"><a href="#Python文件加密" class="headerlink" title="Python文件加密"></a>Python文件加密</h3><blockquote>
+<p>iData提供了加密.py文件的设置。apploadpython之后，会看到”加密”选项，点击之后能将.py文件加密成不可解密的.pyc文件，只能被加载，不能被修改</p>
+</blockquote>
+<h3 id="高程点的展绘和提取"><a href="#高程点的展绘和提取" class="headerlink" title="高程点的展绘和提取"></a>高程点的展绘和提取</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> PyiData <span class="keyword">as</span> pid</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pyTestDrawDAT</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> pid.isDocumentActived():</span><br><span class="line">        print(<span class="string">"文档未打开"</span>)</span><br><span class="line">        pid.iDataPrintf(<span class="string">"文档未打开"</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    </span><br><span class="line">    db=pid.getCurBase() <span class="comment">#获取数据库</span></span><br><span class="line">    geoCode=db.getGeoCodeIndex(<span class="string">'72010010'</span>)  <span class="comment">#获取高程点编码对象</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> geoCode.isValid():</span><br><span class="line">        print(<span class="string">"当前数据库不包含高程点编码"</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    </span><br><span class="line">    entityList=pid.iDataEntityList()</span><br><span class="line"></span><br><span class="line">    datFile=pid.getSourcePath()+<span class="string">"/demo/STUDY.DAT"</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> open(datFile):</span><br><span class="line">        line=line.strip(<span class="string">'\n'</span>)   <span class="comment">#按行读取文件</span></span><br><span class="line">        temp=line.split(<span class="string">','</span>)    <span class="comment">#拆分字符串</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">#当读取没问题且高程不为0，将数据添加进列表</span></span><br><span class="line">        <span class="keyword">if</span> len(temp)==<span class="number">5</span> <span class="keyword">and</span> temp[<span class="number">4</span>]!=<span class="number">0</span>:</span><br><span class="line">            pos=pid.Point3D(float(temp[<span class="number">3</span>]),float(temp[<span class="number">2</span>]),float(temp[<span class="number">4</span>]))</span><br><span class="line">            point=pid.iDataPoint(geoCode,pos)</span><br><span class="line">            entityList.append(point)    <span class="comment">#创建点实体并加入列表</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> len(entityList)&gt;<span class="number">0</span>:</span><br><span class="line">        pid.iDataAppendEntity(entityList)   <span class="comment">#提交</span></span><br><span class="line">        pid.CommitEntity(entityList,pid.iData.kAppended)</span><br><span class="line">        <span class="comment">#pid.iDataExcuteCommand('zoom;e',500)    #延迟0.5秒执行缩放全图命令</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"没有添加任意高程点"</span>)  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pyTestWriteDAT</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> pid.isDocumentActived():</span><br><span class="line">        print(<span class="string">"文档未打开"</span>)</span><br><span class="line">        pid.iDataPrintf(<span class="string">"文档未打开"</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#选择地貌点图层下的所有点</span></span><br><span class="line">    e,entityList=pid.iDataSSGetX(<span class="string">"TERPT"</span>)</span><br><span class="line">    <span class="keyword">if</span> len(entityList)==<span class="number">0</span>:</span><br><span class="line">        print(<span class="string">"地貌点图层没有实体"</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#打开保存文件对话框</span></span><br><span class="line">    filename=pid.BasicUI_getSaveFileName(<span class="string">"选择要保存的文件"</span>,<span class="string">"C:\\"</span>,<span class="string">"DAT文件(*.dat)"</span>)</span><br><span class="line">    <span class="keyword">if</span> len(filename)==<span class="number">0</span>:</span><br><span class="line">        print(<span class="string">"放弃输出DAT文件"</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    file=open(filename,<span class="string">"w"</span>) <span class="comment">#以写入方式打开文件</span></span><br><span class="line">    num=<span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> entity <span class="keyword">in</span> entityList:</span><br><span class="line">        point=pid.iDataEntity.convertToPoint(entity)    <span class="comment">#将抽象实体变为点实体</span></span><br><span class="line">        <span class="keyword">if</span> point.getCode()!=<span class="string">"72010010"</span>: <span class="comment">#过滤编码不是高程点的点</span></span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">        pos=point.getNode() <span class="comment">#取得点坐标</span></span><br><span class="line">        num+=<span class="number">1</span></span><br><span class="line">        dat_line=<span class="string">"%d,,%.3f,%.3f,%.3f\n"</span>%(num,pos.y(),pos.x(),pos.z())   <span class="comment">#设置写入格式</span></span><br><span class="line">        file.write(dat_line)    <span class="comment">#写入文件</span></span><br><span class="line">    file.close()    <span class="comment">#关闭文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># pyTestDrawDAT()</span></span><br><span class="line">pyTestWriteDAT()</span><br></pre></td></tr></table></figure>
+<h3 id="统计植被面积以及天然草地在植被中的面积占比"><a href="#统计植被面积以及天然草地在植被中的面积占比" class="headerlink" title="统计植被面积以及天然草地在植被中的面积占比"></a>统计植被面积以及天然草地在植被中的面积占比</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> PyiData <span class="keyword">as</span> pid</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pyTestStaticArea</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> pid.isDocumentActived():</span><br><span class="line">        print(<span class="string">"文档未打开"</span>)</span><br><span class="line">        pid.iDataPrintf(<span class="string">"文档未打开"</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 手动打开文档</span></span><br><span class="line">    <span class="comment"># mdbFileName=pid.getSourcePath()+"/demo/study.mdb"</span></span><br><span class="line">    <span class="comment"># isOk=pid.OpenDoc(mdbFileName)</span></span><br><span class="line">    <span class="comment"># if not isOk:</span></span><br><span class="line">    <span class="comment">#     print("无法打开MDB文件")</span></span><br><span class="line">    <span class="comment">#     return</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#选择植被图层上的全部实体</span></span><br><span class="line">    e,entityList=pid.iDataSSGetX(<span class="string">"VEGNT"</span>)</span><br><span class="line">    <span class="keyword">if</span> len(entityList)==<span class="number">0</span>:</span><br><span class="line">        print(<span class="string">"植被面图层没有实体"</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    area_total=<span class="number">0.0</span></span><br><span class="line">    area=<span class="number">0.0</span></span><br><span class="line">    <span class="keyword">for</span> entity <span class="keyword">in</span> entityList:</span><br><span class="line">        area_total+=entity.getArea()    <span class="comment">#统计植被面积</span></span><br><span class="line">        <span class="keyword">if</span> entity.getCode()==<span class="string">"81060230"</span>:    <span class="comment">#统计天然植被面积</span></span><br><span class="line">            area+=entity.getArea()</span><br><span class="line">            entity.setHighLight(<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> math.fabs(area_total)&gt;<span class="number">0</span>:</span><br><span class="line">        per=<span class="number">100</span>*area/area_total</span><br><span class="line">        print(<span class="string">"当前图面植被面积%3.2f m^2, 其中天然草地面积%3.2f m^2, 占%.1f%%"</span>%(area_total,area,per))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"无法统计面积"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="输出Excel报表"><a href="#输出Excel报表" class="headerlink" title="输出Excel报表"></a>输出Excel报表</h3><ul>
+<li>实例代码为每一个房屋面输出一个Excel信息表，表中有房屋的各种属性以及渲染图片<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> PyiData <span class="keyword">as</span> pid</span><br><span class="line"><span class="keyword">import</span> xlsxwrite</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pyTestWriteXLSX</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> pid.isDocumentActived():</span><br><span class="line">        print(<span class="string">"文档未打开"</span>)</span><br><span class="line">        pid.iDataPrintf(<span class="string">"文档未打开"</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 选择居民地面图层没有的实体</span></span><br><span class="line">    e, entityList = pid.iDataSSGetX(<span class="string">"RESNT"</span>)</span><br><span class="line">    <span class="keyword">if</span> len(entityList) == <span class="number">0</span>:</span><br><span class="line">        print(<span class="string">"居民地面图层没有实体"</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 打开保存文件对话框</span></span><br><span class="line">    fileDir = pid.BasicUI_getExistingDirectory(<span class="string">"选择要保存EXcel的文件夹"</span>, <span class="string">"C:\\"</span>)</span><br><span class="line">    <span class="keyword">if</span> len(fileDir) == <span class="number">0</span>:</span><br><span class="line">        print(<span class="string">"放弃输出文件"</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> fileDir.endswith(<span class="string">'/'</span>):</span><br><span class="line">        fileDir += <span class="string">'/'</span></span><br><span class="line"></span><br><span class="line">    pid.iDataCreateProgress(<span class="string">"输出房屋信息"</span>)  <span class="comment"># 创建进度条</span></span><br><span class="line">    current = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> entity <span class="keyword">in</span> entityList:</span><br><span class="line">        current += <span class="number">1</span></span><br><span class="line">        pid.iDataSetProgressValue(current, entityList.size())  <span class="comment"># 修改进度条数据</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> current &gt; <span class="number">10</span>:  <span class="comment"># 测试过程减少输出数量</span></span><br><span class="line">            print(<span class="string">"可输出Excel数量超过10，测试超过10即停止"</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">        oid = str(entity.getOID())  <span class="comment"># 用OID做名称</span></span><br><span class="line">        xlsxName = fileDir + oid + <span class="string">".xlsx"</span>  <span class="comment"># Excel文件名</span></span><br><span class="line"></span><br><span class="line">        workBook = xlsxwriter.Workbook(xlsxName)  <span class="comment"># 创建工作簿</span></span><br><span class="line">        workSheet = workBook.add_worksheet()  <span class="comment"># 添加一个Sheet</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 设置列宽</span></span><br><span class="line">        workSheet.set_column(<span class="string">'A:A'</span>, <span class="number">20</span>)</span><br><span class="line">        workSheet.set_column(<span class="string">'B:B'</span>, <span class="number">40</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 设置以及合并表头</span></span><br><span class="line">        merge_format = workBook.add_format(&#123;</span><br><span class="line">            <span class="string">'font_size'</span>: <span class="number">16</span>,</span><br><span class="line">            <span class="string">'bold'</span>: <span class="number">1</span>,</span><br><span class="line">            <span class="comment"># 'bolder': 1,</span></span><br><span class="line">            <span class="string">'align'</span>: <span class="string">'center'</span>,</span><br><span class="line">            <span class="string">'valign'</span>: <span class="string">'vcenter'</span>,</span><br><span class="line">            <span class="string">'fg_color'</span>: <span class="string">'yellow'</span></span><br><span class="line">        &#125;)</span><br><span class="line">        workSheet.merge_range(<span class="string">'A1:B1'</span>, <span class="string">'XXX房屋信息表'</span>, merge_format)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 设置单元格格式</span></span><br><span class="line">        bold = workBook.add_format(&#123;<span class="string">'bold'</span>: <span class="keyword">True</span>, <span class="string">'align'</span>: <span class="string">'center'</span>&#125;)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 写入数据</span></span><br><span class="line">        workSheet.write(<span class="string">'A2'</span>, <span class="string">'房屋层数: '</span>, bold)</span><br><span class="line">        workSheet.write_number(<span class="string">'B2'</span>, entity.getXData(<span class="string">'FWSC'</span>).toInt())</span><br><span class="line">        workSheet.write(<span class="string">'A3'</span>, <span class="string">'地下房屋层数: '</span>, bold)</span><br><span class="line">        workSheet.write_number(<span class="string">'B3'</span>, entity.getXData(<span class="string">'DXFWSC'</span>).toInt())</span><br><span class="line">        workSheet.write(<span class="string">'A4'</span>, <span class="string">'房屋类型: '</span>, bold)</span><br><span class="line">        workSheet.write(<span class="string">'B4'</span>, entity.getXData(<span class="string">'FWLX'</span>).toString())</span><br><span class="line">        workSheet.write(<span class="string">'A5'</span>, <span class="string">'名称: '</span>, bold)</span><br><span class="line">        workSheet.write(<span class="string">'B5'</span>, entity.getXData(<span class="string">'MC'</span>).toString())</span><br><span class="line">        workSheet.write(<span class="string">'A6'</span>, <span class="string">'类别名称: '</span>, bold)</span><br><span class="line">        workSheet.write(<span class="string">'B6'</span>, entity.getName())</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 插入图片</span></span><br><span class="line">        workSheet.merge_range(<span class="string">'A8:B22'</span>, <span class="string">'房屋图片'</span>)</span><br><span class="line">        picName = fileDir + oid + <span class="string">'.png'</span></span><br><span class="line">        pid.saveEntitysToImage(picName, <span class="number">500</span>, <span class="number">300</span>, entity)</span><br><span class="line">        workSheet.insert_image(<span class="string">'A8'</span>, picName, &#123;<span class="string">'x_scale'</span>: <span class="number">0.8</span>, <span class="string">'y_scale'</span>: <span class="number">0.8</span>&#125;)  <span class="comment"># 缩放为80%</span></span><br><span class="line"></span><br><span class="line">        workBook.close()  <span class="comment"># 关闭工作簿</span></span><br><span class="line"></span><br><span class="line">    pid.iDataCloseProgress()  <span class="comment"># 关闭进度条</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://Wlka.github.io/2019/04/13/iData习题课/" data-id="cjuf03cmy0001osuy4l5b4u83" class="article-share-link">Share</a>
+      
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2019/03/10/cpp-STL/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">cpp-STL</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  
+  <div class="outer">
+    <ul class="list-inline">
+      <li>&copy; 2019 Wlka</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://zhwangart.github.io">zhwangart</a></li>
+      <li><i class="fe fe-bar-chart"></i> <span id="busuanzi_value_site_pv"></span></li>
+      <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+    </ul>
+  </div>
+</footer>
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="Wlka"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+<!-- 
+  <script src="/js/search.js"></script>
+ -->
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
