@@ -102,7 +102,91 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/04/13/iData习题课/" data-id="cjui9b2b300005wuyaxtuxkor" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/04/13/iData习题课/" data-id="cjumt7vrw0001i4uy2lqdawoy" class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        <article id="post-数据库图层编码字段" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/04/08/数据库图层编码字段/">数据库图层编码字段</a>
+    </h2>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/04/08/数据库图层编码字段/" class="article-date">
+  <time datetime="2019-04-08T15:36:24.000Z" itemprop="datePublished">2019-04-08</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+        <h4 id="数据库DbBase"><a href="#数据库DbBase" class="headerlink" title="数据库DbBase"></a>数据库DbBase</h4><p>表示一个打开数据库对象，可获取数据中的信息</p>
+<ul>
+<li>dbName: 获取数据库路径</li>
+<li>Type: 数据库类型</li>
+<li>geoCodeList: 获取实体编码列表</li>
+<li>layerList: 获取全部图层列表</li>
+<li>getLayer: 获取指定图层<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">dbBase=pid.getCurBase() <span class="comment">#获取数据库对象</span></span><br><span class="line">print(<span class="string">'数据库路径: '</span>,dbBase.dbName())</span><br><span class="line"><span class="comment">#kDBDefault\kSqlite\kGisPdb\kShape\kSDE\KCAD\KDGN\kGisEdb</span></span><br><span class="line">print(<span class="string">'是不是MDB数据库?'</span>,dbBase.Type()==pid.iData.kGisPdb)</span><br><span class="line"></span><br><span class="line">layers=dbBase.layerList() <span class="comment">#获取所有图层</span></span><br><span class="line">print(<span class="string">'数据库中有'</span>,len(layers),<span class="string">'个图层，分别是: '</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> layers:  <span class="comment">#打印图层名和别名</span></span><br><span class="line">  print(i.getName(),i.getAliasName())</span><br><span class="line">  </span><br><span class="line">geoCodes=dbBase.geoCodeList() <span class="comment">#获取所有编码</span></span><br><span class="line">print(<span class="string">'数据库中有'</span>,len(geoCodes),<span class="string">'个编码'</span>)</span><br><span class="line"></span><br><span class="line">e,layer=dbBase.getLayer(<span class="string">'ROANT'</span>)  <span class="comment">#获取指定图层</span></span><br><span class="line"><span class="keyword">if</span> e==pid.iData.eOk <span class="keyword">and</span> layer.isValid():</span><br><span class="line">  print(<span class="string">'本数据库中存在ROANT图层'</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  print(<span class="string">'LCA图层不存在'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="图层iDataLayer"><a href="#图层iDataLayer" class="headerlink" title="图层iDataLayer"></a>图层iDataLayer</h4><ul>
+<li>getName: 图层名</li>
+<li>getAliasName: 图层别名</li>
+<li>getLayerType: 图层类型</li>
+<li>getGeoCodeList: 图层上的编码列表</li>
+<li>items: 图层包含的所有实体</li>
+<li>xDataFields: 所有扩展属性字段</li>
+<li>field: 获取指定属性字段</li>
+<li>itemsBoundingRect: 图层外包矩形<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">dbBase=pid.getCurBase() <span class="comment">#获取数据库对象</span></span><br><span class="line">e,layer=dbBase.getLayer(<span class="string">'TERLK'</span>)  <span class="comment">#获取指定图层</span></span><br><span class="line"><span class="keyword">if</span> e==pid.iData.eOk <span class="keyword">and</span> layer.isValid():</span><br><span class="line">  print(<span class="string">'图层名'</span>,layer.getName(),<span class="string">'别名'</span>,layer.getAliasName())</span><br><span class="line">  entitys=layer.items() <span class="comment">#获取图层上的所有实体，同iDataSSGetX</span></span><br><span class="line">  print(<span class="string">'图层上有'</span>,len(entitys),<span class="string">'个实体'</span>)</span><br><span class="line">  <span class="keyword">del</span> entitys</span><br><span class="line">  geoCodes=layer.getGeoCodeList() <span class="comment">#获取本图层额编码列表</span></span><br><span class="line">  print(<span class="string">'TERLK图层中有'</span>,len(geoCodes),<span class="string">'个编码，分别是: '</span>)</span><br><span class="line">  <span class="keyword">for</span> c <span class="keyword">in</span> geoCodes:</span><br><span class="line">    print(c.getCode(),c.getUserName())  <span class="comment">#编码以及用户定义的名称</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  print(<span class="string">'TERLK图层不存在'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">dbBase=pid.getCurBase() <span class="comment">#获取数据库对象</span></span><br><span class="line">geoCode=dbBase.getGeoCodeIndex(<span class="string">'76010221'</span>)</span><br><span class="line"><span class="keyword">if</span> geoCode.isValid():</span><br><span class="line">  print(geoCode.getCode(),<span class="string">':'</span>,geoCode.getUserName())</span><br><span class="line">  color=geoCode.getColorIndex()</span><br><span class="line">  print(<span class="string">'颜色索引'</span>,color)</span><br><span class="line">  color=pid.iData_GetColor(color) <span class="comment">#通过索引拿到颜色RGB</span></span><br><span class="line">  print(<span class="string">'颜色'</span>,color)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  print(<span class="string">'当前数据库中不包含(76010221)的编码'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#这里有个自定义的函数v2i需要注意一下</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">v2i</span><span class="params">(d)</span>:</span></span><br><span class="line">  v=pid.Variant()</span><br><span class="line">  v.setValue(d)</span><br><span class="line">  <span class="keyword">return</span> v</span><br><span class="line"></span><br><span class="line">db=pid.getCurBase() <span class="comment">#获取数据库</span></span><br><span class="line">print(<span class="string">'Current DataBase is: '</span>,db.dbName())</span><br><span class="line"><span class="comment">#获取建成房屋(31030130)的编码对象</span></span><br><span class="line">geoCode=db.getGeoCodeIndex(<span class="string">'31030130'</span>)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> geoCode.isValid():</span><br><span class="line">  print(<span class="string">'当前数据库不包含建成房屋(31030130)的编码'</span>)</span><br><span class="line">e,point=pid.iDataGetPoint(<span class="string">'在图面上点选一个点'</span>)</span><br><span class="line"><span class="keyword">if</span> e!=pid.iData.eOk:</span><br><span class="line">  print(<span class="string">'用户放弃选择'</span>)</span><br><span class="line"></span><br><span class="line">x0=point.x()</span><br><span class="line">y0=point.y()</span><br><span class="line"></span><br><span class="line">arrNodes=pid.Point3DListList()</span><br><span class="line"><span class="comment">#绘制面，需要闭合的点，最好是顺时针</span></span><br><span class="line">posList=pid.Point3DList()</span><br><span class="line">posList.append(pid.Point3D(x0,y0,<span class="number">0</span>))</span><br><span class="line">posList.append(pid.Point3D(x0,y0+<span class="number">30</span>,<span class="number">0</span>))</span><br><span class="line">posList.append(pid.Point3D(x0+<span class="number">30</span>,y0+<span class="number">30</span>,<span class="number">0</span>))</span><br><span class="line">posList.append(pid.Point3D(x0+<span class="number">30</span>,y0,<span class="number">0</span>))</span><br><span class="line">posList.append(pid.Point3D(x0,y0,<span class="number">0</span>))</span><br><span class="line">arrNodes.append(posList)</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建实体</span></span><br><span class="line">entity=pid.iDataPolygon(geoCode,arrNodes,pid.DoubleListList())</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置各种属性(必须是实体编码中存在的字段)</span></span><br><span class="line"><span class="comment">#print(pid.version&lt;'1.3.26548')</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">entity.setXData('FWCS',5)</span></span><br><span class="line"><span class="string">entity.setXData('DXFWCS',1)</span></span><br><span class="line"><span class="string">entity.setXData('FWLX','一般房屋')</span></span><br><span class="line"><span class="string">entity.setXData('GD',18.6)</span></span><br><span class="line"><span class="string">entity.setXData('JGLX','砼')</span></span><br><span class="line"><span class="string">entity.setXData('YT','住宅')</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="comment">#版本1.3.26548以下只能用下面的写法，高版本直接用上面的写法</span></span><br><span class="line"><span class="comment">#低版本需要做个数据的类型转换</span></span><br><span class="line">entity.setXData(<span class="string">'FWCS'</span>,v2i(<span class="number">5</span>))</span><br><span class="line">entity.setXData(<span class="string">'DXFWCS'</span>,v2i(<span class="number">1</span>))</span><br><span class="line">entity.setXData(<span class="string">'FWLX'</span>,v2i(<span class="string">'一般房屋'</span>))</span><br><span class="line">entity.setXData(<span class="string">'GD'</span>,v2i(<span class="number">18.6</span>))</span><br><span class="line">entity.setXData(<span class="string">'JGLX'</span>,v2i(<span class="string">'砼'</span>))</span><br><span class="line">entity.setXData(<span class="string">'YT'</span>,v2i(<span class="string">'住宅'</span>))</span><br><span class="line">entity.setXData(<span class="string">'MC'</span>,v2i(<span class="string">'测试房屋'</span>))</span><br><span class="line"></span><br><span class="line">pid.iDataAppendEntity(entity) <span class="comment">#将实体提交到图面</span></span><br><span class="line">pid.CommitEntity(entity,pid.iData.kAppended)  <span class="comment">#提交到数据库</span></span><br><span class="line">pid.iDataRegen(<span class="keyword">None</span>,<span class="keyword">True</span>) <span class="comment">#刷新图面</span></span><br></pre></td></tr></table></figure>
+<h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h4><ul>
+<li><p>文档<br>iData文档相关接口常用的方法如下<br>OpenDoc: 打开文件<br>CloseDoc: 关闭文件<br>getCurBase: 获取当前文件所打开的数据库对象<br>getCurDocPath: 当前文档的路径<br>getSourcePath: 获取当前运行程序的运行环境路径<br>isDocumentActived: 判断当前视图中是否有文档打开</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">isOk=pid.isDocumentActived()  <span class="comment">#获取文档打开状态</span></span><br><span class="line">docPath=<span class="string">'D:\\A\\Program  Pratice\\iData\\idata-standard-1.3\\demo\\study.mdb'</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> isOk:</span><br><span class="line">  isOk=pid.OpenDoc(docPath)</span><br><span class="line">  print(<span class="string">'打开文档'</span>,docPath)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  db=pid.getCurBase() <span class="comment">#获取数据库对象</span></span><br><span class="line">  print(<span class="string">'当前打开数据库: '</span>,db.dbName())  <span class="comment">#获取数据库的名称</span></span><br><span class="line">  docPath=pid.getCurDocPath() <span class="comment">#获取当前打开的文档路径</span></span><br><span class="line">  print(<span class="string">'已经打开文档'</span>,docPath)</span><br><span class="line">  isOk=pid.CloseDoc(docPath) <span class="comment">#关闭文档</span></span><br><span class="line">  print(<span class="string">'关闭文档'</span>,docPath)</span><br><span class="line"></span><br><span class="line">print(pid.getSourcePath())  <span class="comment">#获取iData程序运行路径</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对话框<br>iData接口，包含了大部分常用操作<br>getOpenFileName: 打开文件对话框<br>getOpenFileNames: 打开文件对话框(多选)<br>getExistingDirectory: 打开目录对话框<br>getSaveFileName: 保存文件对话框<br>GetCustomColorDlg: 选择颜色对话框</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#打开文件对话框</span></span><br><span class="line">fileName=pid.getOpenFileName(<span class="string">'选择单个文件'</span>,<span class="string">'D:\\'</span>,<span class="string">'数据库(*.mdb)'</span>)</span><br><span class="line">print(<span class="string">'选择了文件'</span>,fileName)</span><br><span class="line"></span><br><span class="line"><span class="comment">#保存文件对话框</span></span><br><span class="line">fileName=pid.getSaveFileName(<span class="string">'保存文件'</span>,<span class="string">'D:\\'</span>)</span><br><span class="line">print(<span class="string">'保存了文件'</span>，fileName)</span><br><span class="line"></span><br><span class="line"><span class="comment">#打开多选文件对话框</span></span><br><span class="line">fileNameList=pid.getOpenFileName(<span class="string">'选择多个文件'</span>,<span class="string">'D:\\'</span>,<span class="string">'数据库(*.mdb)'</span>)</span><br><span class="line">print(<span class="string">'选择了文件'</span>，len(fileNameList),<span class="string">'个: '</span>)</span><br><span class="line"><span class="keyword">for</span> name <span class="keyword">in</span> fileNameList:</span><br><span class="line">  print(name)</span><br><span class="line"></span><br><span class="line"><span class="comment">#选择目录对话框</span></span><br><span class="line">dirName=pid.getExistingDirectory(<span class="string">'Python选择目录'</span>,<span class="string">'D:\\'</span>)</span><br><span class="line">print(<span class="string">'选择了文件夹: '</span>,dirName)</span><br><span class="line"></span><br><span class="line"><span class="comment">#选择颜色对话框</span></span><br><span class="line">ci=pid.getCustomColorDlg(<span class="number">0</span>)</span><br><span class="line">print(ci) <span class="comment">#用户选择了数据源中的颜色</span></span><br><span class="line">c=pid.iData_GetColor(ci)  <span class="comment">#通过索引拿到颜色RGB</span></span><br><span class="line">print(c)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>交互<br>iDataPrintf: 打印<br>iDataInitGet: 初始化关键字<br>iDataGetString: 获取字符串<br>iDataGetInt: 获取整数数值<br>iDataGetReal: 获取浮点数值<br>iDataGetPoint: 选择一个点<br>iDataGetCorner: 拉框选择点<br>iDataGetOrient: 获取线段和X轴的夹角</p>
+</li>
+<li><p>选择<br>iData接口包含丰富强大的选择功能，可根据不同的需求组合选择出所需要的实体，常用的选择接口如下:<br>iDataEntSel: 单击鼠标选择实体<br>iDataSSGetX: 选择给定的图层上的实体<br>iDataSSGet: 根据给定的点、矩形、多边形等，在给定图层上选择实体<br>iDataGetSelectedEntitys: 获取视图中被选中的实体<br>ClearSelection: 取消对实体的选择状态<br>iDataGetItemsBoundingRect: 获取视图中所有实体的最大外包矩形  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#用鼠标在屏幕上点击选择单个实体</span></span><br><span class="line">e,entity,point=pid.iDataEntSel(<span class="string">'鼠标屏幕点选实体: '</span>)</span><br><span class="line"><span class="keyword">if</span> e==pid.iData.eOk:</span><br><span class="line">  print(<span class="string">'选择了一个实体'</span>)</span><br><span class="line">  print(entity)</span><br><span class="line">  print(<span class="string">'点击位置: '</span>,point)</span><br><span class="line"></span><br><span class="line"><span class="comment">#用鼠标以任意方式选择实体</span></span><br><span class="line">e,entityList=pid.iDataSSGet(<span class="string">'选择实体: '</span>)</span><br><span class="line"><span class="keyword">if</span> e==pid.iData.eOk:</span><br><span class="line">  print(<span class="string">'选了'</span>,len(entityList),<span class="string">'个实体'</span>)</span><br><span class="line"></span><br><span class="line">e,entityList=pid.iDataSSGetX()  <span class="comment">#选择图面所有实体</span></span><br><span class="line"><span class="keyword">if</span> e==pid.iData.eOk:</span><br><span class="line">  pid.iDataDeleteEntity(entityList) <span class="comment">#从图面删除</span></span><br><span class="line">  pid.CommitEntity(entityList,pid.iData.kErased)  <span class="comment">#从数据库中删除</span></span><br><span class="line">  pid.iDataRegen(<span class="keyword">None</span>,<span class="keyword">True</span>)</span><br><span class="line"><span class="keyword">del</span> entityList  <span class="comment">#清空列表</span></span><br><span class="line"></span><br><span class="line">e,entityList=pid.iDataSSGetX([<span class="string">'IDATA'</span>,<span class="string">'ROANT'</span>])  <span class="comment">#选择图面所有实体</span></span><br><span class="line"><span class="keyword">if</span> e==pid.iData.eOk:</span><br><span class="line">  print(<span class="string">'指定图层上有'</span>,len(entityList),<span class="string">'个实体'</span>)</span><br><span class="line"><span class="keyword">for</span> entity <span class="keyword">in</span> entityList:</span><br><span class="line">    entity.setHighLight(<span class="keyword">True</span>)</span><br><span class="line">pid.iDataRegen(pid.Rect(),<span class="keyword">True</span>)</span><br><span class="line"><span class="keyword">del</span> entityList</span><br><span class="line"></span><br><span class="line">pid.iDataExcuteCommand(<span class="string">'undo;1'</span>)  <span class="comment">#执行undo命令，带的参数1表示回退一步，效果同命令行输入一样</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#在指定区域内选择IDATA图层上的实体，框选</span></span><br><span class="line">rect=pid.Rect(<span class="number">0</span>,<span class="number">0</span>,<span class="number">250</span>,<span class="number">250</span>)</span><br><span class="line">e,entityList=pid.iDataSSGetRect(rect,pid.iData.ContainsItemShape,[<span class="string">'IDATA'</span>])</span><br><span class="line"><span class="keyword">if</span> e==pid.iData.eOk:</span><br><span class="line">  print(<span class="string">'在指定区域中找到'</span>,len(entityList),<span class="string">'个实体'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#在指定区域内选择IDATA图层上的实体，交选</span></span><br><span class="line">rect=pid.Rect(<span class="number">0</span>,<span class="number">0</span>,<span class="number">250</span>,<span class="number">250</span>)</span><br><span class="line">e,entityList=pid.iDataSSGetRect(rect,pid.iData.IntersectItemsShape,[<span class="string">'IDATA'</span>])</span><br><span class="line"><span class="keyword">if</span> e==pid.iData.eOk:</span><br><span class="line">  print(<span class="string">'在指定区域中找到'</span>,len(entityList),<span class="string">'个实体'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#这里除了iDataSSGetRect还有iDataSSGetPolgon,通过多边形来选择</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#获取图面中被选中的实体</span></span><br><span class="line">e,entityList=pid.iDataGetSelectedEntitys()</span><br><span class="line"><span class="keyword">if</span> e==pid.iData.eOk:</span><br><span class="line">  print(<span class="string">'当前图面中选中了'</span>,len(entityList),<span class="string">'个实体'</span>)</span><br><span class="line">pid.ClearSelection()  <span class="comment">#清除图面的选择</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://Wlka.github.io/2019/04/08/数据库图层编码字段/" data-id="cjumt7w1k000li4uyopr011dw" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
@@ -153,7 +237,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/03/10/cpp-STL/" data-id="cjui9b2e200015wuylujp2f8g" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/03/10/cpp-STL/" data-id="cjumt7vtf0002i4uya0iitddf" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpp/">cpp</a></li></ul>
 
@@ -212,7 +296,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/03/08/iData实体/" data-id="cjui9b2e900035wuy6mgd0ocq" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/03/08/iData实体/" data-id="cjumt7vtk0004i4uycbmf0ii2" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
@@ -275,7 +359,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/03/07/mySQL安装小记/" data-id="cjui9b2f7000i5wuy8k9fu63j" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/03/07/mySQL安装小记/" data-id="cjumt7vu9000di4uyhfvnn79h" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
 
@@ -332,7 +416,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/03/01/cpp类中重载运算符/" data-id="cjui9b2f5000h5wuyflgmgip5" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/03/01/cpp类中重载运算符/" data-id="cjumt7vu3000ai4uyoizzf92c" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpp/">cpp</a></li></ul>
 
@@ -400,7 +484,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/02/24/搭建博客/" data-id="cjui9b2ep000a5wuypdirexk7" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/02/24/搭建博客/" data-id="cjumt7vud000fi4uyjb39th21" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客搭建/">博客搭建</a></li></ul>
 
@@ -469,7 +553,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/02/24/iData基本数据类型/" data-id="cjui9b2eg00055wuy0cb6lwzk" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/02/24/iData基本数据类型/" data-id="cjumt7vu6000bi4uy2uc9twpz" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
@@ -527,7 +611,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/02/24/hello-world/" data-id="cjui9b2ed00045wuyqufcblke" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/02/24/hello-world/" data-id="cjumt7vlb0000i4uyqssk4v71" class="article-share-link">Share</a>
       
     </footer>
 
@@ -587,7 +671,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/02/23/关于const/" data-id="cjui9b2em00085wuyw2qaa371" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/02/23/关于const/" data-id="cjumt7vuo000ki4uysvamt9i2" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpp/">cpp</a></li></ul>
 
