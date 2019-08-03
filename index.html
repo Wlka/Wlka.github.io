@@ -58,6 +58,72 @@
 
     
       
+        <article id="post-网易内推笔试总结" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/08/03/网易内推笔试总结/">网易内推笔试总结</a>
+    </h2>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/08/03/网易内推笔试总结/" class="article-date">
+  <time datetime="2019-08-03T08:53:39.000Z" itemprop="datePublished">2019-08-03</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+        <ul>
+<li>写在前面  </li>
+</ul>
+<p>今天下午做了一下网易的内推笔试，这段时间一直在刷题，没注重基础知识的补充，所以在问答题上吃了大亏(问答题有两道，一道是关于智能指针的，另一道是inline函数的)，下面就来总结一下</p>
+<hr>
+<h3 id="smart-pointer"><a href="#smart-pointer" class="headerlink" title="smart pointer"></a>smart pointer</h3><p>在c++标准里，智能指针有4种，auto_ptr、shared_ptr、weak_ptr、unique_ptr，其中后面三个是c++11新加进来的，第一个是c++98的，在新标准中已经被抛弃</p>
+<h5 id="auto-ptr-所有权模式"><a href="#auto-ptr-所有权模式" class="headerlink" title="auto_ptr(所有权模式)"></a>auto_ptr(所有权模式)</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">auto_ptr</span>&lt;<span class="built_in">string</span>&gt; p1(<span class="keyword">new</span> <span class="built_in">string</span>(<span class="string">"test"</span>));</span><br><span class="line"><span class="built_in">auto_ptr</span>&lt;<span class="built_in">string</span>&gt; p2;</span><br><span class="line">p2=p1;	<span class="comment">//此时并不报错</span></span><br><span class="line"><span class="comment">//p2剥夺了p1的所有权，当程序运行时如果访问到p1将会报错</span></span><br><span class="line"><span class="comment">//这是auto_ptr的缺点：存在潜在的内存崩溃问题</span></span><br></pre></td></tr></table></figure>
+<h5 id="unique-ptr-替换auto-ptr，所有权模式，独占式拥有或严格拥有"><a href="#unique-ptr-替换auto-ptr，所有权模式，独占式拥有或严格拥有" class="headerlink" title="unique_ptr(替换auto_ptr，所有权模式，独占式拥有或严格拥有)"></a>unique_ptr(替换auto_ptr，所有权模式，独占式拥有或严格拥有)</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//保证同一时间内只有一个智能指针可以指向该对象，对于避免资源泄露特别有用</span></span><br><span class="line"><span class="built_in">unique_ptr</span>&lt;<span class="built_in">string</span>&gt; p3(<span class="keyword">new</span> <span class="built_in">string</span>(<span class="string">"test"</span>));</span><br><span class="line"><span class="built_in">unique_ptr</span>&lt;<span class="built_in">string</span>&gt; p4;</span><br><span class="line">p4=p3;	<span class="comment">//报错，编译器认为p3=p4非法</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//此外，unique_ptr还有一个更聪明的地方，当程序试图将一个unique_ptr赋值给另一个时，如果源unique_ptr是临时右值，编译器允许会这么做，但是如果源unique_ptr将存在一段时间，编译器将禁止这一行为</span></span><br><span class="line"><span class="built_in">unique_ptr</span>&lt;<span class="built_in">string</span>&gt; p5(<span class="keyword">new</span> <span class="built_in">string</span>(<span class="string">"test"</span>));</span><br><span class="line"><span class="built_in">unique_ptr</span>&lt;<span class="built_in">string</span>&gt; p6;</span><br><span class="line">p6=p5;	<span class="comment">//非法，因为这样会留下悬挂的p5，可能有潜在危害</span></span><br><span class="line"><span class="comment">//如果非要这么做的话，需要用安全的做法，同时也能给它赋新值</span></span><br><span class="line">p6=move(p5);	<span class="comment">//转移所有权</span></span><br><span class="line">p5=<span class="keyword">new</span> <span class="built_in">string</span>(<span class="string">"new string"</span>);	<span class="comment">//赋新值</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">unique_ptr</span>&lt;<span class="built_in">string</span>&gt; p7=<span class="built_in">unique_ptr</span>&lt;<span class="built_in">string</span>&gt;(<span class="keyword">new</span> <span class="built_in">unique_ptr</span>&lt;<span class="built_in">string</span>&gt;(<span class="string">"test"</span>));	<span class="comment">//允许</span></span><br></pre></td></tr></table></figure>
+<h5 id="shared-ptr-共享式拥有，多个智能指针指向同一对象，当最后一个引用被销毁时资源释放"><a href="#shared-ptr-共享式拥有，多个智能指针指向同一对象，当最后一个引用被销毁时资源释放" class="headerlink" title="shared_ptr(共享式拥有，多个智能指针指向同一对象，当最后一个引用被销毁时资源释放)"></a>shared_ptr(共享式拥有，多个智能指针指向同一对象，当最后一个引用被销毁时资源释放)</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过计数机制表明资源b被几个指针共享，可以通过use_count()查看资源所有者个数，可通过new进行构造，也可通过auto_ptr、unique_ptr、weak_ptr来构造，当调用release()时，当前指针释放所有权，计数减1，当计数为0时资源释放</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">成员函数如下:</span></span><br><span class="line"><span class="comment">use_count	返回引用计数个数</span></span><br><span class="line"><span class="comment">unique	返回是否是独占所所有权(use_count为1)</span></span><br><span class="line"><span class="comment">swap	交换两个shared_ptr所拥有的对象</span></span><br><span class="line"><span class="comment">reset	放弃内部对象的所有权或拥有对象的变更，会引起原有对象引用计数的减少</span></span><br><span class="line"><span class="comment">get		返回内部对象指针，由于已经重载了()方法，因此和直接使用对象是一样的</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h5 id="weak-ptr-不控制对象生命周期的智能指针"><a href="#weak-ptr-不控制对象生命周期的智能指针" class="headerlink" title="weak_ptr(不控制对象生命周期的智能指针)"></a>weak_ptr(不控制对象生命周期的智能指针)</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">指向一个shared_ptr管理的对象，进行该对象的内存管理是那个强引用的shared_ptr</span></span><br><span class="line"><span class="comment">weak_ptr只是提供了对管理对象的一个访问手段</span></span><br><span class="line"><span class="comment">设计目的是为配合shared_ptr而引入的一种智能指针来协助shared_ptr进行工作</span></span><br><span class="line"><span class="comment">它可以从一个shared_ptr或l另一个weak_ptr对象构造，其构造和析构不会引起计数的变化</span></span><br><span class="line"><span class="comment">用来解决shared_ptr的死锁问题</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">shared_ptr</span>&lt;B&gt; pb_;</span><br><span class="line">    ~A();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">shared_ptr</span>&lt;A&gt; pa_;</span><br><span class="line">    ~B();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">shared_ptr</span>&lt;B&gt; pb(<span class="keyword">new</span> B());</span><br><span class="line">    <span class="built_in">shared_ptr</span>&lt;A&gt; pa(<span class="keyword">new</span> A());</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//pa和pb相互引用</span></span><br><span class="line">    pb-&gt;pa_=pa;</span><br><span class="line">    pa-&gt;pb_=pb;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;pb.use_count()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;pa.use_count()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    fun();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">当跳出fun函数时，智能指针pa和pb析构时两个资源引用计数会减1，但二者引用计数还是为1，导致跳出函数时资源没有b被释放(即析构函数没有被调用)，这时把其中一个shared_ptr改为weak_ptr即可</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">另外，weak_ptr不能直接访问对象的方法，需要先转化为shared_ptr才能进行操作</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="inline"><a href="#inline" class="headerlink" title="inline"></a>inline</h3><ul>
+<li><p>又称内联函数，用来建议编译器对一些特殊的函数进行内联扩展，节省每次调用函数的开支，但是需要在占用空间和程序效率上进行权衡，对过多的复杂的函数进行内联会带来很大的存储资源开支，对于递归函数的内联扩展则可能会引起部分编译器的无穷编译；</p>
+</li>
+<li><p>与宏相比较：宏调用不检查类型，而且进行的是文本替换，需要计算操作顺序，内联代码更方便调试</p>
+</li>
+<li>不足之处是对于基于C的编译系统，内联函数的使用在代码量增加的同时也可能大大增加编译时间</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://Wlka.github.io/2019/08/03/网易内推笔试总结/" data-id="cjyveh1rz000eugw1ajq5muft" class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpp/">cpp</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
         <article id="post-iData习题课" class="article article-type-post" itemscope itemprop="blogPost">
 
   <div class="article-inner">
@@ -102,7 +168,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/04/13/iData习题课/" data-id="cjumt7vrw0001i4uy2lqdawoy" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/04/13/iData习题课/" data-id="cjyveh1mx0000ugw1pkw9bzfx" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
@@ -186,7 +252,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/04/08/数据库图层编码字段/" data-id="cjumt7w1k000li4uyopr011dw" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/04/08/数据库图层编码字段/" data-id="cjyveh1ti000mugw15kol4ti0" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
@@ -237,7 +303,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/03/10/cpp-STL/" data-id="cjumt7vtf0002i4uya0iitddf" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/03/10/cpp-STL/" data-id="cjyveh1r20003ugw1m4i4o005" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpp/">cpp</a></li></ul>
 
@@ -296,7 +362,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/03/08/iData实体/" data-id="cjumt7vtk0004i4uycbmf0ii2" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/03/08/iData实体/" data-id="cjyveh1rp0008ugw188c5bwlq" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
@@ -359,7 +425,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/03/07/mySQL安装小记/" data-id="cjumt7vu9000di4uyhfvnn79h" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/03/07/mySQL安装小记/" data-id="cjyveh1sr000jugw1e2z7j2dp" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
 
@@ -416,7 +482,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/03/01/cpp类中重载运算符/" data-id="cjumt7vu3000ai4uyoizzf92c" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/03/01/cpp类中重载运算符/" data-id="cjyveh1rn0007ugw1rh2zenb6" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpp/">cpp</a></li></ul>
 
@@ -484,7 +550,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/02/24/搭建博客/" data-id="cjumt7vud000fi4uyjb39th21" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/02/24/搭建博客/" data-id="cjyveh1rw000cugw1e53p97p4" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客搭建/">博客搭建</a></li></ul>
 
@@ -553,7 +619,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/02/24/iData基本数据类型/" data-id="cjumt7vu6000bi4uy2uc9twpz" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/02/24/iData基本数据类型/" data-id="cjyveh1rt000augw1y8tzloy2" class="article-share-link">Share</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
@@ -611,70 +677,8 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/02/24/hello-world/" data-id="cjumt7vlb0000i4uyqssk4v71" class="article-share-link">Share</a>
+      <a data-url="https://Wlka.github.io/2019/02/24/hello-world/" data-id="cjyveh1qx0001ugw1zgpsv1kc" class="article-share-link">Share</a>
       
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        <article id="post-关于const" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/02/23/关于const/">关于const</a>
-    </h2>
-  
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/02/23/关于const/" class="article-date">
-  <time datetime="2019-02-23T13:54:07.561Z" itemprop="datePublished">2019-02-23</time>
-</a>
-        
-      </div>
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-      
-        <ul>
-<li><p>const在星号左边，例如const int <em>p，不可以通过</em>p来修改指向位置的数据,但是可以修改p指向的地址  </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a=<span class="number">5</span>,b=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *p=&amp;a;</span><br><span class="line">*p=<span class="number">10</span>;  <span class="comment">//not allowed</span></span><br><span class="line">*p=&amp;b;  <span class="comment">//allowed</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>const在星号右边，例如int<em> const q,可以通过修改</em>q来修改指向位置的数据，但是不可以修改q指向的地址  </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a=<span class="number">5</span>,b=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> * <span class="keyword">const</span> q=&amp;a;</span><br><span class="line">*q=<span class="number">10</span>;  <span class="comment">//allowed</span></span><br><span class="line">*q=&amp;b;  <span class="comment">//not allowed</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<hr>
-<ul>
-<li>const在函数后，该函数为const成员函数，函数不能修改数据成员，也不能调用非const函数</li>
-<li>const在函数前，修改该函数的返回值，函数返回值(指针)的内容不能被修改，只能被赋给同类型的const指针</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://Wlka.github.io/2019/02/23/关于const/" data-id="cjumt7vuo000ki4uysvamt9i2" class="article-share-link">Share</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpp/">cpp</a></li></ul>
-
     </footer>
 
   </div>
@@ -690,6 +694,11 @@
       
   </article>
   
+  
+    <nav class="page-nav">
+      
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Olde posts</a>
+    </nav>
   
 </section>
 </div>
