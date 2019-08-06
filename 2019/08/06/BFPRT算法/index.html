@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  
+    <meta name="description" content="Welcome to my blog">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    BFPRT算法 |
+    
+    Wlka</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-BFPRT算法" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      BFPRT算法
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/08/06/BFPRT算法/" class="article-date">
+  <time datetime="2019-08-06T08:03:55.000Z" itemprop="datePublished">2019-08-06</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+        <p>topK是一道经典面试题，就是在一堆数里找出第K大的数字</p>
+<p>这道题有很多解法，这里介绍一下BFPRT算法</p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>BFPRT算法，又称为中位数的中位数算法，它的最坏时间复杂度为$O(n)$，它是由Blum、Floyd、Pratt、Rivest、Tarjan提出。该算法的思想是修改快速选择算法的主元选取方法，提高算法在最坏情况下的时间复杂度</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>我们知道快速排序每次从序列中选取一个数作为基准，将序列中比基准大的数放在基准右边，比基准小的放在基准左边，一趟快速排序成为partition，我们无法确保每次划分得很均匀，所以最坏情况下不能保证时间复杂度为$O(n log n)$，而是$O(n^2)$。在BFPRT算法中，仅仅是改变了每趟快速排序的pivot值的选取，即每次将序列划分为5份，挑选中位数作为pivot，在每份里面进行插入排序</p>
+<h3 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h3><p>$T(n)≤T(n/5)+T(7n/10)+c*n$</p>
+<p>设$T(n)=t*n$，其中t可能是一个常数，也可能是关于n的函数，代入上式</p>
+<p>$t<em>n≤t</em>n/5+t<em>7n/10+c</em>n $ -&gt; $t≤10c$</p>
+<p>c是常数，所以t也是常数，即$T(n)≤10c*n$，所以$T(n)=O(n)$</p>
+<hr>
+<p>那么为什么是5呢？首先偶数排数，对于奇数来说中位数的选取更容易，如果选取7、9或是更大，插入排序时耗时增加，有些得不偿失，而选择3时，有$T(n)=T(n/3)+T(2n/3)+c*n$，其操作元素个数还是n</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li>将n个元素划分为$n/5$组，每组5个</li>
+<li>寻找着$n/5$个组中每组的中位数，可以用插入排序</li>
+<li>对步骤2中的$n/5$个中位数重复步骤1、2，递归下去知道剩下一个数字</li>
+<li>最终剩下的数字即为pivot，大于它的数放左边，小于小于它的放右边</li>
+<li>判断pivot位置与k的大小，有选择的对左边或右边递归</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//插入排序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;a, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=l+<span class="number">1</span>; i&lt;=r;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i<span class="number">-1</span>]&gt;a[i])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> t=a[i];</span><br><span class="line">            <span class="keyword">int</span> j=i;</span><br><span class="line">            <span class="keyword">while</span>(j&gt;l &amp;&amp; a[j<span class="number">-1</span>]&gt;t)</span><br><span class="line">            &#123;</span><br><span class="line">                a[j] = a[j<span class="number">-1</span>];</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">            a[j]=t;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//寻找中位数的中位数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">FindMid</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;a,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l==r) <span class="keyword">return</span> l;</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> n=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(i=l; i&lt;r<span class="number">-5</span>; i+=<span class="number">5</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        InsertSort(a,i,i+<span class="number">4</span>);</span><br><span class="line">        n=i-l;</span><br><span class="line">        swap(a[l+n/<span class="number">5</span>],a[i+<span class="number">2</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//处理剩余元素</span></span><br><span class="line">    <span class="keyword">int</span> num=r-i+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(num&gt;<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        InsertSort(a,i,i+num<span class="number">-1</span>);</span><br><span class="line">        n=i-l;</span><br><span class="line">        swap(a[l+n/<span class="number">5</span>],a[i+num/<span class="number">2</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    n/=<span class="number">5</span>;</span><br><span class="line">    <span class="keyword">if</span>(n==l) <span class="keyword">return</span> l;</span><br><span class="line">    <span class="keyword">return</span> FindMid(a,l,l+n);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//进行划分过程</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Partion</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;a,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    swap(a[p],a[l]);</span><br><span class="line">    <span class="keyword">int</span> i=l;</span><br><span class="line">    <span class="keyword">int</span> j=r;</span><br><span class="line">    <span class="keyword">int</span> pivot=a[l];</span><br><span class="line">    <span class="keyword">while</span>(i&lt;j)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(a[j]&gt;=pivot &amp;&amp; i&lt;j)</span><br><span class="line">            j--;</span><br><span class="line">        a[i]=a[j];</span><br><span class="line">        <span class="keyword">while</span>(a[i]&lt;=pivot &amp;&amp; i&lt;j)</span><br><span class="line">            i++;</span><br><span class="line">        a[j]=a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    a[i]=pivot;</span><br><span class="line">    <span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">BFPRT</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;a,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> p=FindMid(a,l,r);    <span class="comment">//寻找中位数的中位数</span></span><br><span class="line">    <span class="keyword">int</span> i=Partion(a,l,r,p);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">int</span> m=i-l+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(m==k) <span class="keyword">return</span> a[i];</span><br><span class="line">    <span class="keyword">if</span>(m&gt;k)  <span class="keyword">return</span> BFPRT(a,l,i<span class="number">-1</span>,k);</span><br><span class="line">    <span class="keyword">return</span> BFPRT(a,i+<span class="number">1</span>,r,k-m);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,k;    <span class="comment">//数据数量和K值</span></span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; a(n,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) <span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;k;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> i:a) <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"\n第"</span>&lt;&lt;k&lt;&lt;<span class="string">"大数字: "</span>&lt;&lt;BFPRT(a,<span class="number">0</span>,n<span class="number">-1</span>,k)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://Wlka.github.io/2019/08/06/BFPRT算法/" data-id="cjyzjijnn0000h8w1tr05gwoe" class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cpp/">cpp</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2019/08/06/从文件中恢复二叉树/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            从文件中恢复二叉树
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2019/08/06/vim使用命令/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">vim使用命令</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  
+  <div class="outer">
+    <ul class="list-inline">
+      <li>&copy; 2019 Wlka</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://zhwangart.github.io">zhwangart</a></li>
+      <li><i class="fe fe-bar-chart"></i> <span id="busuanzi_value_site_pv"></span></li>
+      <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+    </ul>
+  </div>
+</footer>
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="Wlka"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+<!-- 
+  <script src="/js/search.js"></script>
+ -->
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

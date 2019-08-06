@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  
+  
+    <meta name="description" content="Welcome to my blog">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    vim使用命令 |
+    
+    Wlka</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-vim使用命令" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vim使用命令
+    </h1>
+  
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/08/06/vim使用命令/" class="article-date">
+  <time datetime="2019-08-06T08:03:32.000Z" itemprop="datePublished">2019-08-06</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+        <h3 id="vim基本操作"><a href="#vim基本操作" class="headerlink" title="vim基本操作"></a>vim基本操作</h3><blockquote>
+<p>编辑模式  </p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">i/I</td>
+<td style="text-align:center">从光标所在位置插入/在目前所在行第一个非空格符处插入</td>
+</tr>
+<tr>
+<td style="text-align:center">a/A</td>
+<td style="text-align:center">从光标所在下一个字符处插入/在目前所在行最后一个字符处插入</td>
+</tr>
+<tr>
+<td style="text-align:center">o/O</td>
+<td style="text-align:center">从光标所在下一行输入新行/从光标所在上一行输入新行</td>
+</tr>
+<tr>
+<td style="text-align:center">r/R</td>
+<td style="text-align:center">只取代光标所在字符一次/一直取代光标所在文字直到按下Esc</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>指令行模式</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">:w</td>
+<td style="text-align:center">保存</td>
+</tr>
+<tr>
+<td style="text-align:center">:w!</td>
+<td style="text-align:center">强制写入只读文件，但是还是跟权限有关</td>
+</tr>
+<tr>
+<td style="text-align:center">:q</td>
+<td style="text-align:center">退出vim</td>
+</tr>
+<tr>
+<td style="text-align:center">:q!</td>
+<td style="text-align:center">退出vim但是不修改文件</td>
+</tr>
+<tr>
+<td style="text-align:center">:wq</td>
+<td style="text-align:center">保存退出</td>
+</tr>
+<tr>
+<td style="text-align:center">:wq!</td>
+<td style="text-align:center">强制保存退出</td>
+</tr>
+<tr>
+<td style="text-align:center">ZZ</td>
+<td style="text-align:center">文件被修改则保存后离开，否则直接离开</td>
+</tr>
+<tr>
+<td style="text-align:center">:w filename</td>
+<td style="text-align:center">将数据保存到另一个文件，相当于另存为</td>
+</tr>
+<tr>
+<td style="text-align:center">:r filename</td>
+<td style="text-align:center">将filename的数据加到编辑数据的光标所在行后面</td>
+</tr>
+<tr>
+<td style="text-align:center">:n1,n2 w filename</td>
+<td style="text-align:center">将n1到n2行的内容保存到filename文件中</td>
+</tr>
+<tr>
+<td style="text-align:center">:!command</td>
+<td style="text-align:center">暂时离开vim到指令行模式执行command的显示结果</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>vim环境变更</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">:set nu</td>
+<td style="text-align:center">在每行前显示行号</td>
+</tr>
+<tr>
+<td style="text-align:center">:set nonu</td>
+<td style="text-align:center">取消显示行号</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>一般模式</p>
+</blockquote>
+<ul>
+<li>移动光标</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">hjkl</td>
+<td style="text-align:center">光标左下上右移动一个字符，在前面搭配数字可以实现快速移动，方向键效果一样</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl+f</td>
+<td style="text-align:center">效果同Page Down</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl+b</td>
+<td style="text-align:center">效果同Page Up</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl+d</td>
+<td style="text-align:center">向下移动半页</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl+u</td>
+<td style="text-align:center">向上移动半页</td>
+</tr>
+<tr>
+<td style="text-align:center">+/-</td>
+<td style="text-align:center">光标移动到非空格符下/上一行</td>
+</tr>
+<tr>
+<td style="text-align:center">n+space</td>
+<td style="text-align:center">光标向右移动这行的n个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">n+Enter</td>
+<td style="text-align:center">光标向下移动n行</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">效果同Home</td>
+</tr>
+<tr>
+<td style="text-align:center">$</td>
+<td style="text-align:center">效果同End</td>
+</tr>
+<tr>
+<td style="text-align:center">H/L</td>
+<td style="text-align:center">光标移动到屏幕最上/下方那行的第一个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">M</td>
+<td style="text-align:center">光标移动到屏幕中央那行第一个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">G</td>
+<td style="text-align:center">移动到这个文件最后一行</td>
+</tr>
+<tr>
+<td style="text-align:center">nG</td>
+<td style="text-align:center">移动到这个文件第n行</td>
+</tr>
+<tr>
+<td style="text-align:center">gg</td>
+<td style="text-align:center">移动到文件第一行</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>搜索替换</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">/word</td>
+<td style="text-align:center">向光标之下寻找一个名为word的字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">?word</td>
+<td style="text-align:center">向光标之上寻找一个名为word的字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">n</td>
+<td style="text-align:center">重复一次前一个搜索动作</td>
+</tr>
+<tr>
+<td style="text-align:center">N</td>
+<td style="text-align:center">反向重复一次前一个搜索动作</td>
+</tr>
+<tr>
+<td style="text-align:center">:n1,n2s/word1/word2/g[c]</td>
+<td style="text-align:center">在n1到n2行之间用word2取代word1，最后一个c是可选项，表示取代前提示用户确认</td>
+</tr>
+<tr>
+<td style="text-align:center">:1,$s/word1/word2/g</td>
+<td style="text-align:center">从第一行到最后一行将word1替换为word2</td>
+</tr>
+<tr>
+<td style="text-align:center">:%s/word1/word2/g</td>
+<td style="text-align:center">效果同上</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>删除/复制/粘贴</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">命令</th>
+<th style="text-align:center">用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">x/X</td>
+<td style="text-align:center">向后/前删除一个字符，效果同delete和backspace</td>
+</tr>
+<tr>
+<td style="text-align:center">nx/nX</td>
+<td style="text-align:center">连续向后/前删除n个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">dd</td>
+<td style="text-align:center">删除光标所在的整行</td>
+</tr>
+<tr>
+<td style="text-align:center">ndd</td>
+<td style="text-align:center">删除光标所在的向下n行</td>
+</tr>
+<tr>
+<td style="text-align:center">d1G</td>
+<td style="text-align:center">删除光标所在到第一行的所有数据</td>
+</tr>
+<tr>
+<td style="text-align:center">dG</td>
+<td style="text-align:center">删除光标所在到最后一行的所有数据</td>
+</tr>
+<tr>
+<td style="text-align:center">d$</td>
+<td style="text-align:center">删除光标所在行到该行最后一个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">d0</td>
+<td style="text-align:center">删除光标所在行到该行最前面一个字符</td>
+</tr>
+<tr>
+<td style="text-align:center">yy</td>
+<td style="text-align:center">复制光标所在行</td>
+</tr>
+<tr>
+<td style="text-align:center">nyy</td>
+<td style="text-align:center">复制光标所在的向下n行</td>
+</tr>
+<tr>
+<td style="text-align:center">y1G</td>
+<td style="text-align:center">复制光标所在到第一行的所有数据</td>
+</tr>
+<tr>
+<td style="text-align:center">yG</td>
+<td style="text-align:center">复制光标所在到最后一行的所有数据</td>
+</tr>
+<tr>
+<td style="text-align:center">y$</td>
+<td style="text-align:center">复制光标所在行到该行行尾的所有数据</td>
+</tr>
+<tr>
+<td style="text-align:center">y0</td>
+<td style="text-align:center">复制光标所在行到该行行首的所有数据</td>
+</tr>
+<tr>
+<td style="text-align:center">p/P</td>
+<td style="text-align:center">将复制的数据粘贴到光标下/上一行</td>
+</tr>
+<tr>
+<td style="text-align:center">J</td>
+<td style="text-align:center">将光标所在行与下一行数据结合成一行</td>
+</tr>
+<tr>
+<td style="text-align:center">c</td>
+<td style="text-align:center">重复删除多个数据，例如10ck为向上删除10行</td>
+</tr>
+<tr>
+<td style="text-align:center">u</td>
+<td style="text-align:center">复原前一个动作，类似撤销</td>
+</tr>
+<tr>
+<td style="text-align:center">Ctrl+r</td>
+<td style="text-align:center">重做上一个动作，类似取消撤销</td>
+</tr>
+<tr>
+<td style="text-align:center">.</td>
+<td style="text-align:center">重复上一个动作</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>one more thing</p>
+</blockquote>
+<ul>
+<li>Ctrl+v可以进入块选择模式</li>
+<li>:n1,n2s/^/注释符/g可以快速在多行行首添加注释</li>
+<li>:n1,n2s/^注释符//g可以快速取消多行注释</li>
+</ul>
+<blockquote>
+<p>打开多文件</p>
+</blockquote>
+<ul>
+<li>vim file1 file2 file3</li>
+<li>:n #跳到下一个文件</li>
+<li>:n filename #跳到指定文件</li>
+<li>:e# #回到刚才编辑的文件</li>
+</ul>
+<blockquote>
+<p>打开多窗口</p>
+</blockquote>
+<ul>
+<li>vim -p file1 file2 file3 #标签页形式打开多窗口</li>
+<li>vim -o[-O] file1 file2 file3 #水平/垂直打开多窗口</li>
+<li>vim -d[diff] file1 file2 file3 #垂直打开多窗口，并且进行比较</li>
+</ul>
+<blockquote>
+<p>关闭窗口</p>
+</blockquote>
+<ul>
+<li>:q/:close #关闭当前窗口</li>
+<li>:only #保留当前窗口，关闭其他所有窗口</li>
+<li>:qall/qa #退出所有窗口</li>
+<li>:wall #保存所有窗口</li>
+</ul>
+<blockquote>
+<p>窗口切换</p>
+</blockquote>
+<ul>
+<li>:Ctrl+w+j/k上下切换，也可以Ctrl+w+w一次切换窗口</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://Wlka.github.io/2019/08/06/vim使用命令/" data-id="cjyzjijpr0009h8w17jav3fjo" class="article-share-link">Share</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2019/08/06/BFPRT算法/" class="article-nav-link">
+        <strong class="article-nav-caption">Newer posts</strong>
+        <div class="article-nav-title">
+          
+            BFPRT算法
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2019/08/04/排序算法/" class="article-nav-link">
+        <strong class="article-nav-caption">Olde posts</strong>
+        <div class="article-nav-title">排序算法</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  
+  <div class="outer">
+    <ul class="list-inline">
+      <li>&copy; 2019 Wlka</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>Theme  <a href="https://zhwangart.github.io">zhwangart</a></li>
+      <li><i class="fe fe-bar-chart"></i> <span id="busuanzi_value_site_pv"></span></li>
+      <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+    </ul>
+  </div>
+</footer>
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/hexo.svg" alt="Wlka"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">Home</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">Archives</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        Search
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+<!-- 
+  <script src="/js/search.js"></script>
+ -->
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
