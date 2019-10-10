@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[最长回文串]]></title>
+    <url>%2F2019%2F10%2F10%2F%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E4%B8%B2%2F</url>
+    <content type="text"><![CDATA[很久以前我就在leetcode上看到过这么一道题 123456789给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为1000示例：输入: "babad"输出: "bab"注意: "aba" 也是一个有效答案。输入: "cbbd"输出: "bb" 这道题有很多种求解方法，讨论区也有不少人分享了他们的解法，其中就包括了暴力解法、动态规划求解、中心扩展法、Manacher(马拉车)算法，但是今晚我看到了另一种解法 1234567891011121314151617181920212223242526272829303132333435363738class Solution &#123;public: string longestPalindrome(string s) &#123; if(s.empty() || s.length()==1) return s; //分别存放回文串的起点终点 int range[2]=&#123;0,0&#125;; for(int i=0;i&lt;s.length();++i) &#123; i=findLongest(s,i,range); &#125; //返回起点和终点间的字符串 return s.substr(range[0],range[1]-range[0]+1); &#125; int findLongest(string s,int low,int range[]) &#123; int high=low; //找到第一个不相同的位置 while(high&lt;s.length()-1 &amp;&amp; s[high+1]==s[low]) ++high; //把回文左右对称，保存中间位置 int ans=high; //从中间向两边扩展 while(low&gt;0 &amp;&amp; high&lt;s.length()-1 &amp;&amp; s[low-1]==s[high+1]) &#123; --low; ++high; &#125; //记录最大长度 if(high-low&gt;range[1]-range[0]) &#123; range[0]=low; range[1]=high; &#125; return ans; &#125;&#125;; 这个方法不仅不需要修改原有字符串或者额外申请O(n)的空间，而且时间复杂度为O(n^2)，相比较于中心扩展法或马拉车算法，不需要考虑字符串长度为奇偶数的情况，也不需要修改字符串(在每个字符前添加一个’#’来确保字符串长度为偶数)，Amazing!]]></content>
+      <tags>
+        <tag>cpp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[从文件中恢复二叉树]]></title>
     <url>%2F2019%2F08%2F06%2F%E4%BB%8E%E6%96%87%E4%BB%B6%E4%B8%AD%E6%81%A2%E5%A4%8D%E4%BA%8C%E5%8F%89%E6%A0%91%2F</url>
     <content type="text"><![CDATA[假设有一个需求，将二叉树存入文件，并想办法从文件中读取出来，然后重构这棵二叉树首先，要想办法把二叉树从文件数据中重构，那么一定要想办法找出合适的遍历算法将二叉树存入到文件 我们知道二叉树有四种遍历：前序、中序、后序、层次遍历，但是这里面只有一种遍历算法符合我们的要求 1234567891011121314151617181920212223242526272829/**************************************************************先假设我们有一个这样的二叉树 30 / \ 20 40 / / \10 35 50它的中序遍历和后序遍历父节点都不在叶子节点前先输出，这样我么你无法确定父节点和它孩子的位置但是前序遍历则没有这个问题，父节点总是在叶子节点前先输出，我们先构造父节点，然后确定孩子节点但是在操作时，需要记录空节点，否则处理上会有问题**************************************************************/void readBST(struct node *&amp;root, ifstream &amp;fin) &#123; int val; fin &gt;&gt; val; //先读取根节点数据 readBSTHelper(INT_MIN, INT_MAX, val, root, fin);//传入父节点数据，递归调用函数来确定左右孩子&#125;void readBSTHelper(int min,int max,int &amp;insertVal,class node *&amp;p,ifstream &amp;fin) &#123; if (insertVal &gt; min &amp;&amp; insertVal &lt; max) &#123; p = newNode(insertVal); //构造父节点 while(fin &gt;&gt; insertVal &amp;&amp; insertVal=="#") fin&gt;&gt;insertVal;//继续读取数据，并跳过空节点 readBSTHelper(min, val, insertVal, p-&gt;left, fin); readBSTHelper(val, max, insertVal, p-&gt;right, fin); &#125;&#125;]]></content>
